@@ -1,8 +1,8 @@
 package dto
 
 import (
-	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
-	"github.com/gomaglev/microshop/pkg/util"
+	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/entity"
+	"github.com/gomaglev/microshop/v1/pkg/util"
 
 	"github.com/gomaglev/protos/pkg/proto/common/v1"
 	proto "github.com/gomaglev/protos/pkg/proto/order/v1"

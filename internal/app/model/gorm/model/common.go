@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gomaglev/microshop/pkg/icontext"
+	"github.com/gomaglev/microshop/v1/pkg/icontext"
 
 	"github.com/gomaglev/protos/pkg/proto/common/v1"
 

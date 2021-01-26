@@ -3,8 +3,8 @@ package item
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/internal/app/dto"
-	"github.com/gomaglev/microshop/internal/app/model"
+	"github.com/gomaglev/microshop/v1/internal/app/dto"
+	"github.com/gomaglev/microshop/v1/internal/app/model"
 
 	"github.com/google/wire"
 )

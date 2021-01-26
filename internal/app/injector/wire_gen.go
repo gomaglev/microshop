@@ -6,11 +6,11 @@
 package injector
 
 import (
-	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
-	"github.com/gomaglev/microshop/internal/app/service"
-	"github.com/gomaglev/microshop/internal/app/service/order/item/v1"
-	"github.com/gomaglev/microshop/internal/app/service/order/v1"
-	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
+	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/model"
+	"github.com/gomaglev/microshop/v1/internal/app/service"
+	"github.com/gomaglev/microshop/v1/internal/app/service/order/item/v1"
+	"github.com/gomaglev/microshop/v1/internal/app/service/order/v1"
+	"github.com/gomaglev/microshop/v1/internal/pkg/server/rpc"
 )
 
 // Injectors from wire.go:

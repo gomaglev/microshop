@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
+	"github.com/gomaglev/microshop/v1/internal/pkg/server/rpc"
 
 	"github.com/google/wire"
 )

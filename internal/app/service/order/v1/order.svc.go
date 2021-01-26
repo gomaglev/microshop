@@ -3,8 +3,9 @@ package order
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/internal/app/dto"
-	"github.com/gomaglev/microshop/internal/app/model"
+	"github.com/gomaglev/microshop/v1/internal/app/dto"
+	"github.com/gomaglev/microshop/v1/internal/app/model"
+	iutil "github.com/gomaglev/microshop/v1/internal/pkg/util"
 
 	"github.com/google/wire"
 )
@@ -46,6 +47,7 @@ func (a *OrderService) List(ctx context.Context, req *ListOrdersRequest) (*ListO
 
 // Create order
 func (a *OrderService) Create(ctx context.Context, req *CreatOrderRequest) (*CreatOrderResponse, error) {
+	req.Order.Id = iutil.NewID()
 	result, err := a.OrderModel.Create(ctx, req.Order)
 	res := &CreatOrderResponse{
 		Id: result.Id,

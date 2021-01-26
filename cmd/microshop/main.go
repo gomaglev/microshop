@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/gomaglev/microshop/internal/app"
-	"github.com/gomaglev/microshop/pkg/logger"
+	"github.com/gomaglev/microshop/v1/internal/app"
+	"github.com/gomaglev/microshop/v1/pkg/logger"
 
 	"github.com/urfave/cli/v2"
 )

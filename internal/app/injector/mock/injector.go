@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"github.com/gomaglev/microshop/internal/app/service/order/v1"
+	"github.com/gomaglev/microshop/v1/internal/app/service/order/v1"
 	"github.com/google/wire"
 )
 

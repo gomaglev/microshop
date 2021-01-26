@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/gomaglev/microshop/internal/pkg/config"
-	"github.com/gomaglev/microshop/pkg/logger"
-	loggerhook "github.com/gomaglev/microshop/pkg/logger/hook"
-	loggergormhook "github.com/gomaglev/microshop/pkg/logger/hook/gorm"
-	loggermongohook "github.com/gomaglev/microshop/pkg/logger/hook/mongo"
+	"github.com/gomaglev/microshop/v1/internal/pkg/config"
+	"github.com/gomaglev/microshop/v1/pkg/logger"
+	loggerhook "github.com/gomaglev/microshop/v1/pkg/logger/hook"
+	loggergormhook "github.com/gomaglev/microshop/v1/pkg/logger/hook/gorm"
+	loggermongohook "github.com/gomaglev/microshop/v1/pkg/logger/hook/mongo"
 
 	"github.com/sirupsen/logrus"
 )

@@ -3,10 +3,10 @@ package iutil
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/internal/pkg/config"
-	"github.com/gomaglev/microshop/pkg/logger"
-	"github.com/gomaglev/microshop/pkg/trace"
-	"github.com/gomaglev/microshop/pkg/unique"
+	"github.com/gomaglev/microshop/v1/internal/pkg/config"
+	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/v1/pkg/trace"
+	"github.com/gomaglev/microshop/v1/pkg/unique"
 
 	"github.com/teris-io/shortid"
 )

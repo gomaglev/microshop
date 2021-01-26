@@ -1,9 +1,9 @@
 package injector
 
 import (
-	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/v1/internal/pkg/config"
 
-	igorm "github.com/gomaglev/microshop/internal/app/model/gorm"
+	igorm "github.com/gomaglev/microshop/v1/internal/app/model/gorm"
 
 	"gorm.io/gorm"
 )

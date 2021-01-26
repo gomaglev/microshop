@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/gomaglev/microshop/pkg/logger"
+	"github.com/gomaglev/microshop/v1/pkg/logger"
 
 	jsoniter "github.com/json-iterator/go"
 	"github.com/sirupsen/logrus"

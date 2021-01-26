@@ -3,9 +3,10 @@ package model
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/internal/app/dto"
-	"github.com/gomaglev/microshop/internal/app/model"
-	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
+	"github.com/bmeg/grip/util"
+	"github.com/gomaglev/microshop/v1/internal/app/dto"
+	"github.com/gomaglev/microshop/v1/internal/app/model"
+	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/entity"
 
 	"github.com/gomaglev/protos/pkg/proto/common/v1"
 	"github.com/gomaglev/protos/pkg/proto/order/v1"
@@ -64,7 +65,6 @@ func (m *Order) Get(ctx context.Context, params *dto.GetOrderParam) (*order.Orde
 func (m *Order) Create(ctx context.Context, item *order.Order) (*common.IDResult, error) {
 	pitem := dto.ProtoOrder{Order: item}
 	eitem := pitem.ToEntity()
-
 	result := entity.GetOrderDB(ctx, m.DB).Create(eitem)
 	if err := result.Error; err != nil {
 

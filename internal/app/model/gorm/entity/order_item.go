@@ -3,7 +3,7 @@ package entity
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/pkg/util"
+	"github.com/gomaglev/microshop/v1/pkg/util"
 
 	proto "github.com/gomaglev/protos/pkg/proto/order/item/v1"
 	"gorm.io/gorm"

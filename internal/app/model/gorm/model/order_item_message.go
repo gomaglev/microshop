@@ -3,9 +3,9 @@ package model
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/internal/app/dto"
-	"github.com/gomaglev/microshop/internal/app/model"
-	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
+	"github.com/gomaglev/microshop/v1/internal/app/dto"
+	"github.com/gomaglev/microshop/v1/internal/app/model"
+	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/entity"
 
 	"github.com/gomaglev/protos/pkg/proto/common/v1"
 	"github.com/gomaglev/protos/pkg/proto/order/item/message/v1"
