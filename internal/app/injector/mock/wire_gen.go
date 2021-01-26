@@ -21,11 +21,11 @@ func BuildMockInjector() (*MockInjector, func(), error) {
 	modelOrder := &model.Order{
 		DB: db,
 	}
-	orderService := order.OrderService{
+	orderService := &order.OrderService{
 		OrderModel: modelOrder,
 	}
 	mockInjector := &MockInjector{
-		OrderService: &orderService,
+		OrderService: orderService,
 	}
 	return mockInjector, func() {
 		cleanup()

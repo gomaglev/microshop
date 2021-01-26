@@ -19,14 +19,14 @@ KeyFile = ""
 # graceful shutdown timeout(s)
 ShutdownTimeout = 30
 # API URL, Prefix
-PathPrefix="http://192.168.1.118:8888"
+PathPrefix="/api"
 # enable
 Enable=true
 
 [GRPC]
 # http host
 Host = "0.0.0.0"
-# http port
+# tcp port for grpc server
 Port = 8889
 # cert file
 CertFile = ""

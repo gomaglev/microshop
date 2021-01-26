@@ -26,10 +26,6 @@ type Register struct {
 	OrderService *order.OrderService
 }
 
-var (
-	targetEndPoint = fmt.Sprintf("localhost:%s", config.C.Gateway.Port)
-)
-
 func (r *Register) DialOption() []grpc.DialOption {
 	var opts []grpc.DialOption
 	opts = append(opts, grpc.WithInsecure())
@@ -46,15 +42,21 @@ func (r *Register) RegisterServiceServers(server *grpc.Server) {
 
 // RegisterServiceHandlerFromEndpoints implementation
 func (r *Register) RegisterServiceHandlerFromEndpoints(ctx context.Context, multiplexer *runtime.ServeMux) error {
+	endpoint := r.endpoint()
+	dialOption := r.DialOption()
 	// Item Service
 	if err := item.RegisterItemServiceHandlerFromEndpoint(
-		ctx, multiplexer, targetEndPoint, r.DialOption()); err != nil {
+		ctx, multiplexer, endpoint, dialOption); err != nil {
 		return err
 	}
 	// Order Service
 	if err := order.RegisterOrderServiceHandlerFromEndpoint(
-		ctx, multiplexer, targetEndPoint, r.DialOption()); err != nil {
+		ctx, multiplexer, endpoint, dialOption); err != nil {
 		return err
 	}
 	return nil
+}
+
+func (r *Register) endpoint() string {
+	return fmt.Sprintf("%s:%d", config.C.Gateway.Host, config.C.Gateway.Port)
 }

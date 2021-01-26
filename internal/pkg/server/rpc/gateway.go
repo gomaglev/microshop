@@ -17,22 +17,13 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 // GatewaySet injection
 var GatewaySet = wire.NewSet(wire.Struct(new(Gateway), "*"))
 
-// ServerConfig represents the configuration for gRPC Gateway.
-// type GatewayConfig struct {
-// 	Host       string
-// 	Port       string
-// 	PathPrefix string
-// }
-
 type Gateway struct {
 	Register IRegister
-	// Config   GatewayConfig
 }
 
 func (s *Gateway) Setup(
@@ -46,10 +37,7 @@ func (s *Gateway) Setup(
 	serveMux := runtime.NewServeMux(
 		runtime.WithMarshalerOption(
 			runtime.MIMEWildcard,
-			&runtime.JSONPb{
-				MarshalOptions:   protojson.MarshalOptions{},
-				UnmarshalOptions: protojson.UnmarshalOptions{},
-			},
+			&runtime.JSONPb{},
 		),
 	)
 
@@ -87,8 +75,12 @@ func (s *Gateway) Setup(
 	}
 
 	go func() {
+		// GRPC_GO_LOG_VERBOSITY_LEVEL
 		logger.Infof(ctx, "[API]: starting api server")
-		srv.ListenAndServe()
+		err := srv.ListenAndServe()
+		if err != nil {
+			logger.Errorf(ctx, err.Error())
+		}
 	}()
 
 	return func() {

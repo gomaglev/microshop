@@ -282,8 +282,8 @@ type Config struct {
 	WWW         string
 	Swagger     bool
 	PrintConfig bool
-	Gateway     Gateway
 	GRPC        GRPC
+	Gateway     Gateway
 	Interceptor Interceptor
 	Monitor     Monitor
 	BasicAuth   BasicAuth

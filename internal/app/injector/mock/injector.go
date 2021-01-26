@@ -1,8 +1,7 @@
 package mock
 
 import (
-	service "github.com/gomaglev/microshop/internal/app/service/order/v1"
-
+	"github.com/gomaglev/microshop/internal/app/service/order/v1"
 	"github.com/google/wire"
 )
 
@@ -10,5 +9,5 @@ import (
 var MockInjectorSet = wire.NewSet(wire.Struct(new(MockInjector), "*"))
 
 type MockInjector struct {
-	OrderService service.OrderServiceServer
+	OrderService *order.OrderService
 }

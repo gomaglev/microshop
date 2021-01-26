@@ -28,28 +28,10 @@ import (
 // ServerSet injection
 var ServerSet = wire.NewSet(wire.Struct(new(Server), "*"))
 
-// // Config represents the configuration for gRPC Server.
-// type ServerConfig struct {
-// 	Host                 string
-// 	Port                 string
-// 	CertFile             string
-// 	KeyFile              string
-// 	EnableLogrus         bool
-// 	EnableRateLimit      bool
-// 	EnableRecovery       bool
-// 	EnableAuthentication bool
-// 	EnableAuthorization  bool
-// 	BasicAuthToken       string
-
-// 	Authentic func(ctx context.Context) (context.Context, error)
-// 	Authorize func(ctx context.Context) (context.Context, error)
-// }
-
 // Server
 type Server struct {
 	Register IRegister
 	Limiter  grpclimit.Limiter
-	//Config   ServerConfig
 }
 
 // Setup configures the API package.
