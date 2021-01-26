@@ -1,0 +1,1 @@
+docker run --name redis -p6379:6379 -d redis redis-server --appendonly yes

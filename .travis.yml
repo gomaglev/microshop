@@ -1,0 +1,57 @@
+sudo: required
+
+language: go
+
+go:
+- "1.14"
+
+services:
+  - docker
+  - redis-server
+
+env:
+  global:  
+    - CORRECTED_DOCKER_TAG=${TRAVIS_BRANCH//\//-}
+    - DATE=$(date +"%Y%m%d-%H%M")
+    - COMMIT=${TRAVIS_COMMIT:0:8}
+    - ENV=debug
+    - FAIL_LIMIT=10
+    - REDIS_HOST=localhost:6379
+    - REDIS_AUTH=
+    - REDIS_KEY=microshop
+    - REDIS_EXPIRE=72h
+    - 
+install: true
+
+before_install:
+  - cd $HOME
+  - mv $HOME/gopath/src/github.com/gomaglev $HOME/gomaglev
+  - TRAVIS_BUILD_DIR=$HOME/gomaglev/microshop
+  - cd $HOME/gomaglev/microshop
+
+script:
+  - go clean -modcache
+  - go get -t -v ./cmd/microshop
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: make publish-version DOCKER_TAG=$CORRECTED_DOCKER_TAG-$DATE-$COMMIT
+    on:
+      all_branches: true
+      condition: "$TRAVIS_BRANCH =~ ^dev|staging$"
+  - provider: script
+    skip_cleanup: true
+    script: make publish-version DOCKER_TAG=$CORRECTED_DOCKER_TAG
+    on:
+      all_branches: true
+      condition: "! $TRAVIS_BRANCH =~ ^dev|staging|master$"
+  - provider: script
+    skip_cleanup: true
+    script: make publish-release DOCKER_TAG=$TRAVIS_TAG
+    on:
+      tags: true
+ 

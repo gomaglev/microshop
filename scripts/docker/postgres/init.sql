@@ -1,0 +1,2 @@
+CREATE DATABASE telemetry;
+GRANT ALL PRIVILEGES ON DATABASE telemetry TO postgres;
