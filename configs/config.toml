@@ -19,7 +19,7 @@ KeyFile = ""
 # graceful shutdown timeout(s)
 ShutdownTimeout = 30
 # API URL, Prefix
-PathPrefix="/api"
+PathPrefix="/"
 # enable
 Enable=true
 

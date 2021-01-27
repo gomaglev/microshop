@@ -4,9 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	order "github.com/gomaglev/microshop/internal/app/service/order"
-	item "github.com/gomaglev/microshop/internal/app/service/order/item"
-
+	orderv1 "github.com/gomaglev/microshop/internal/app/service/v1/order"
+	itemv1 "github.com/gomaglev/microshop/internal/app/service/v1/order/item"
+	orderv2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
+	itemv2 "github.com/gomaglev/microshop/internal/app/service/v2/order/item"
 	"github.com/gomaglev/microshop/internal/pkg/config"
 
 	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
@@ -22,8 +23,10 @@ var _ rpc.IRegister = (*Register)(nil)
 var RegisterSet = wire.NewSet(wire.Struct(new(Register), "*"), wire.Bind(new(rpc.IRegister), new(*Register)))
 
 type Register struct {
-	ItemService  *item.ItemService
-	OrderService *order.OrderService
+	ItemServiceV1  *itemv1.ItemService
+	OrderServiceV1 *orderv1.OrderService
+	ItemServiceV2  *itemv2.ItemService
+	OrderServiceV2 *orderv2.OrderService
 }
 
 func (r *Register) DialOption() []grpc.DialOption {
@@ -35,9 +38,13 @@ func (r *Register) DialOption() []grpc.DialOption {
 // RegisterServiceServers implementation
 func (r *Register) RegisterServiceServers(server *grpc.Server) {
 	// Item Service
-	item.RegisterItemServiceServer(server, r.ItemService)
+	itemv1.RegisterItemServiceServer(server, r.ItemServiceV1)
 	// Order Service
-	order.RegisterOrderServiceServer(server, r.OrderService)
+	orderv1.RegisterOrderServiceServer(server, r.OrderServiceV1)
+	// Item Service
+	itemv2.RegisterItemServiceServer(server, r.ItemServiceV2)
+	// Order Service
+	orderv2.RegisterOrderServiceServer(server, r.OrderServiceV2)
 }
 
 // RegisterServiceHandlerFromEndpoints implementation
@@ -45,12 +52,20 @@ func (r *Register) RegisterServiceHandlerFromEndpoints(ctx context.Context, mult
 	endpoint := r.endpoint()
 	dialOption := r.DialOption()
 	// Item Service
-	if err := item.RegisterItemServiceHandlerFromEndpoint(
+	if err := itemv1.RegisterItemServiceHandlerFromEndpoint(
+		ctx, multiplexer, endpoint, dialOption); err != nil {
+		return err
+	}
+	if err := itemv2.RegisterItemServiceHandlerFromEndpoint(
 		ctx, multiplexer, endpoint, dialOption); err != nil {
 		return err
 	}
 	// Order Service
-	if err := order.RegisterOrderServiceHandlerFromEndpoint(
+	if err := orderv1.RegisterOrderServiceHandlerFromEndpoint(
+		ctx, multiplexer, endpoint, dialOption); err != nil {
+		return err
+	}
+	if err := orderv2.RegisterOrderServiceHandlerFromEndpoint(
 		ctx, multiplexer, endpoint, dialOption); err != nil {
 		return err
 	}

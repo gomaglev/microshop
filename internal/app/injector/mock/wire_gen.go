@@ -8,7 +8,7 @@ package mock
 import (
 	"github.com/gomaglev/microshop/internal/app/injector"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
-	"github.com/gomaglev/microshop/internal/app/service/order"
+	"github.com/gomaglev/microshop/internal/app/service/v1/order"
 )
 
 // Injectors from wire.go:

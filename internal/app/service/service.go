@@ -1,8 +1,10 @@
 package service
 
 import (
-	order "github.com/gomaglev/microshop/internal/app/service/order"
-	item "github.com/gomaglev/microshop/internal/app/service/order/item"
+	orderv1 "github.com/gomaglev/microshop/internal/app/service/v1/order"
+	itemv1 "github.com/gomaglev/microshop/internal/app/service/v1/order/item"
+	orderv2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
+	itemv2 "github.com/gomaglev/microshop/internal/app/service/v2/order/item"
 
 	"github.com/google/wire"
 )
@@ -10,6 +12,8 @@ import (
 // ServiceSet api injection
 var ServiceSet = wire.NewSet(
 	RegisterSet,
-	order.OrderSet,
-	item.ItemSet,
+	orderv1.OrderSet,
+	itemv1.ItemSet,
+	orderv2.OrderSet,
+	itemv2.ItemSet,
 )

@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+// @protomicro: module:"order/item" plural="orders/items" description:"OrderItem service"
+package pkg.proto.order.item.v1;
+option go_package = "service/v1/order/item;item";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "pkg/proto/order/item/types.proto";
+import "pkg/proto/common/common.proto";
+
+service ItemService {
+  // Get order/item 
+  rpc Get(GetItemRequest) returns (GetItemResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id}/items/{id}"
+      response_body : "item"
+    };
+  }
+
+  // list items
+  rpc List(ListItemsRequest) returns (ListItemsResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id}/items"
+      response_body : "items"
+    };
+  }
+
+  // Create order/item
+  rpc Create(CreatItemRequest) returns (CreatItemResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders/{order_id}/items"
+      body: "*"
+    };
+  };
+
+  // Update order/item
+  rpc Update(UpdateItemRequest) returns (UpdateItemResponse) {
+		option (google.api.http) = {
+			put: "/v1/orders/{order_id}/items/{id}"
+			body: "*"
+		};
+  }
+  
+  // Delete order/item
+	rpc Delete(DeleteItemRequest) returns (DeleteItemResponse) {
+		option (google.api.http) = {
+			delete: "/v1/orders/{order_id}/items/{id}"
+    };
+  }
+}
+
+message GetItemRequest {
+  string id = 1;
+  string order_id = 2;
+}
+
+message GetItemResponse {
+  OrderItem item = 1;
+}
+
+message ListItemsRequest {
+  repeated string ids = 1;
+  string order_id = 2;
+  common.PaginationParam pagination=3 [(validate.rules).message.required = true];
+}
+
+message ListItemsResponse {
+  OrderItems items = 1;
+  
+}
+
+message CreatItemRequest {
+  string order_id = 1;
+  OrderItem item = 2;
+}
+
+message CreatItemResponse {
+  string id = 1;  
+}
+
+message UpdateItemRequest {
+  string id = 1;
+  string order_id = 2;
+  OrderItem item = 3;
+}
+
+message UpdateItemResponse {
+  int64 updated = 1;
+}
+
+
+message DeleteItemRequest {
+  string id = 1;
+  string order_id = 2;
+}
+
+message DeleteItemResponse {
+  int64 deleted = 1;
+}

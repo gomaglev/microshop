@@ -5,7 +5,7 @@ import (
 
 	"github.com/bxcodec/faker/v3"
 	"github.com/gomaglev/microshop/internal/app/injector/mock"
-	"github.com/gomaglev/microshop/internal/app/service/order"
+	"github.com/gomaglev/microshop/internal/app/service/v1/order"
 	iutil "github.com/gomaglev/microshop/internal/pkg/util"
 	orderproto "github.com/gomaglev/protos/pkg/proto/order"
 	"github.com/pkg/errors"

@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+// @protomicro: app:"app" module:"product" plural="products" description:"Product service"
+package pkg.proto.product.v1;
+option go_package = "service/v1/product;product";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "pkg/proto/product/types.proto";
+import "pkg/proto/common/common.proto";
+
+service ProductService {
+  // Get product
+  rpc Get(GetProductRequest) returns (GetProductResponse) {
+    option (google.api.http) = {
+      get: "/v1/products/{id}"
+      response_body : "product"
+    };
+  }
+
+  // List products
+  rpc List(ListProductsRequest) returns (ListProductsResponse) {
+    option (google.api.http) = {
+      get: "/v1/products"
+      response_body : "products"
+    };
+  }
+
+  // Create product
+  rpc Create(CreatProductRequest) returns (CreatProductResponse) {
+    option (google.api.http) = {
+      post: "/v1/products"
+      body: "*"
+    };
+  };
+
+  // Update product
+  rpc Update(UpdateProductRequest) returns (UpdateProductResponse) {
+		option (google.api.http) = {
+			put: "/v1/products/{id}"
+			body: "product"
+			additional_bindings: [
+				{
+					patch: "/v1/products/{id}"
+					body: "*"
+				}
+			]
+		};
+  }
+  
+  // Delete product
+	rpc Delete(DeleteProductRequest) returns (DeleteProductResponse) {
+		option (google.api.http) = {
+			delete: "/v1/products/{id}"
+    };
+  }
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+}
+
+message ListProductsRequest {
+  repeated string ids = 1;
+  string application_id = 2;
+  string account_id = 3;
+  common.PaginationParam pagination=4 [(validate.rules).message.required = true];
+}
+
+message ListProductsResponse {
+  Products products = 1;
+  
+}
+
+message CreatProductRequest {
+  Product product = 1;
+}
+
+message CreatProductResponse {
+  string id = 1;  
+}
+
+message UpdateProductRequest {
+  string id = 1;
+  Product product = 2;
+}
+
+message UpdateProductResponse {
+  int64 updated = 1;
+}
+
+
+message DeleteProductRequest {
+  string id = 1;
+}
+
+message DeleteProductResponse {
+  int64 deleted = 1;
+}
