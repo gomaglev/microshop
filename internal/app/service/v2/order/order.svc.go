@@ -27,6 +27,7 @@ func (a *OrderService) Get(ctx context.Context, req *GetOrderRequest) (*GetOrder
 		Id: req.Id,
 	}
 	order, err := a.OrderModel.Get(ctx, params)
+	order.Status = "v2"
 	res := &GetOrderResponse{
 		Order: order,
 	}
@@ -70,7 +71,8 @@ func (a *OrderService) Update(ctx context.Context, req *UpdateOrderRequest) (*Up
 // Delete order
 func (a *OrderService) Delete(ctx context.Context, req *DeleteOrderRequest) (*DeleteOrderResponse, error) {
 	params := &dto.DeleteOrderParam{
-		Id: req.Id,
+		Id:  req.Id,
+		Ids: req.Ids,
 	}
 	rows, err := a.OrderModel.Delete(ctx, params)
 	res := &DeleteOrderResponse{

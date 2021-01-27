@@ -7,7 +7,6 @@ import (
 	orderv1 "github.com/gomaglev/microshop/internal/app/service/v1/order"
 	itemv1 "github.com/gomaglev/microshop/internal/app/service/v1/order/item"
 	orderv2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
-	itemv2 "github.com/gomaglev/microshop/internal/app/service/v2/order/item"
 	"github.com/gomaglev/microshop/internal/pkg/config"
 
 	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
@@ -25,7 +24,6 @@ var RegisterSet = wire.NewSet(wire.Struct(new(Register), "*"), wire.Bind(new(rpc
 type Register struct {
 	ItemServiceV1  *itemv1.ItemService
 	OrderServiceV1 *orderv1.OrderService
-	ItemServiceV2  *itemv2.ItemService
 	OrderServiceV2 *orderv2.OrderService
 }
 
@@ -41,8 +39,6 @@ func (r *Register) RegisterServiceServers(server *grpc.Server) {
 	itemv1.RegisterItemServiceServer(server, r.ItemServiceV1)
 	// Order Service
 	orderv1.RegisterOrderServiceServer(server, r.OrderServiceV1)
-	// Item Service
-	itemv2.RegisterItemServiceServer(server, r.ItemServiceV2)
 	// Order Service
 	orderv2.RegisterOrderServiceServer(server, r.OrderServiceV2)
 }
@@ -53,10 +49,6 @@ func (r *Register) RegisterServiceHandlerFromEndpoints(ctx context.Context, mult
 	dialOption := r.DialOption()
 	// Item Service
 	if err := itemv1.RegisterItemServiceHandlerFromEndpoint(
-		ctx, multiplexer, endpoint, dialOption); err != nil {
-		return err
-	}
-	if err := itemv2.RegisterItemServiceHandlerFromEndpoint(
 		ctx, multiplexer, endpoint, dialOption); err != nil {
 		return err
 	}

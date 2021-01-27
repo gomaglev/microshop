@@ -3,51 +3,79 @@ package category
 import (
 	"context"
 
+	"github.com/gomaglev/microshop/internal/app/dto"
+	"github.com/gomaglev/microshop/internal/app/model"
+	iutil "github.com/gomaglev/microshop/internal/pkg/util"
+
 	"github.com/google/wire"
 )
 
 // make sure Category implements category_grpc CategoryServiceServer
-var _ CategoryServiceServer = (*Category)(nil)
+var _ CategoryServiceServer = (*CategoryService)(nil)
 
 // CategorySet injection
-var CategorySet = wire.NewSet(wire.Struct(new(Category), "*"))
+var CategorySet = wire.NewSet(wire.Struct(new(CategoryService), "*"), wire.Bind(new(CategoryServiceServer), new(*CategoryService)))
 
 // Category implements CategoryServiceServer
-type Category struct {
-	//CategoryModel model.ICategory
+type CategoryService struct {
+	CategoryModel model.ICategory
 }
 
 // Get category
-func (a *Category) Get(ctx context.Context, req *GetCategoryRequest) (*GetCategoryResponse, error) {
-	// params := dto.GetCategoryParam{
-	// 	Id: req.Id,
-	// }
-	// category, err := b.CategoryModel.Get(ctx, params)
-	// res := &GetCategoryResponse{
-	// 	Category: category,
-	// }
-	return nil, nil
+func (a *CategoryService) Get(ctx context.Context, req *GetCategoryRequest) (*GetCategoryResponse, error) {
+	params := &dto.GetCategoryParam{
+		Id: req.Id,
+	}
+	category, err := a.CategoryModel.Get(ctx, params)
+	res := &GetCategoryResponse{
+		Category: category,
+	}
+	return res, err
 }
 
-// List categorys
-func (a *Category) List(ctx context.Context, req *ListCategoriesRequest) (*ListCategoriesResponse, error) {
-	res := &ListCategoriesResponse{
-		Categories: nil,
+// List categories
+func (a *CategoryService) List(ctx context.Context, req *ListCategoriesRequest) (*ListCategoriesResponse, error) {
+	params := &dto.ListCategoriesParam{
+		Ids: req.Ids,
 	}
-	return res, nil
+	categories, err := a.CategoryModel.List(ctx, params)
+	res := &ListCategoriesResponse{
+		Categories: categories,
+	}
+	return res, err
 }
 
 // Create category
-func (a *Category) Create(ctx context.Context, req *CreatCategoryRequest) (*CreatCategoryResponse, error) {
-	return nil, nil
+func (a *CategoryService) Create(ctx context.Context, req *CreatCategoryRequest) (*CreatCategoryResponse, error) {
+	req.Category.Id = iutil.NewID()
+	result, err := a.CategoryModel.Create(ctx, req.Category)
+	res := &CreatCategoryResponse{
+		Id: result.Id,
+	}
+	return res, err
 }
 
 // Update category
-func (a *Category) Update(ctx context.Context, req *UpdateCategoryRequest) (*UpdateCategoryResponse, error) {
-	return nil, nil
+func (a *CategoryService) Update(ctx context.Context, req *UpdateCategoryRequest) (*UpdateCategoryResponse, error) {
+	params := &dto.UpdateCategoryParam{
+		Id: req.Id,
+	}
+	rows, err := a.CategoryModel.Update(ctx, params, req.Category)
+	res := &UpdateCategoryResponse{
+		Updated: *rows,
+	}
+	return res, err
 }
 
 // Delete category
-func (a *Category) Delete(ctx context.Context, req *DeleteCategoryRequest) (*DeleteCategoryResponse, error) {
-	return nil, nil
+func (a *CategoryService) Delete(ctx context.Context, req *DeleteCategoryRequest) (*DeleteCategoryResponse, error) {
+	params := &dto.DeleteCategoryParam{
+		Id:  req.Id,
+		Ids: req.Ids,
+	}
+	rows, err := a.CategoryModel.Delete(ctx, params)
+	res := &DeleteCategoryResponse{
+		Deleted: *rows,
+	}
+	return res, err
 }

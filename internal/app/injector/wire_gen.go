@@ -11,7 +11,6 @@ import (
 	"github.com/gomaglev/microshop/internal/app/service/v1/order"
 	"github.com/gomaglev/microshop/internal/app/service/v1/order/item"
 	order2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
-	item2 "github.com/gomaglev/microshop/internal/app/service/v2/order/item"
 	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
 )
 
@@ -34,16 +33,12 @@ func BuildInjector() (*Injector, func(), error) {
 	orderService := &order.OrderService{
 		OrderModel: modelOrder,
 	}
-	itemItemService := &item2.ItemService{
-		ItemModel: orderItem,
-	}
 	orderOrderService := &order2.OrderService{
 		OrderModel: modelOrder,
 	}
 	register := &service.Register{
 		ItemServiceV1:  itemService,
 		OrderServiceV1: orderService,
-		ItemServiceV2:  itemItemService,
 		OrderServiceV2: orderOrderService,
 	}
 	limiter := InitGrpcLimiter()

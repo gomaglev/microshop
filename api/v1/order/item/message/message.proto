@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+// @protomicro: module:"order/message" plural="orders/messages" description:"OrderMessage service"
+package pkg.proto.order.item.message.v1;
+option go_package = "service/v1/order/item/message;message";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "pkg/proto/order/item/message/types.proto";
+import "pkg/proto/common/common.proto";
+
+service MessageService {
+  // Get order/message 
+  rpc Get(GetMessageRequest) returns (GetMessageResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id}/messages/{id}"
+      response_body : "message"
+    };
+  }
+
+  // list messages
+  rpc List(ListMessagesRequest) returns (ListMessagesResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id}/messages"
+      response_body : "messages"
+    };
+  }
+
+  // Create order/message
+  rpc Create(CreatMessageRequest) returns (CreatMessageResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders/{order_id}/messages"
+      body: "*"
+    };
+  };
+
+  // Update order/message
+  rpc Update(UpdateMessageRequest) returns (UpdateMessageResponse) {
+		option (google.api.http) = {
+			put: "/v1/orders/{order_id}/messages/{id}"
+			body: "*"
+		};
+  }
+  
+  // Delete order/message
+	rpc Delete(DeleteMessageRequest) returns (DeleteMessageResponse) {
+		option (google.api.http) = {
+			delete: "/v1/orders/{order_id}/messages/{id}"
+    };
+  }
+}
+
+message GetMessageRequest {
+  string id = 1;
+  string order_id = 2;
+}
+
+message GetMessageResponse {
+    OrderItemMessage message = 1;
+}
+
+message ListMessagesRequest {
+  repeated string ids = 1;
+  string order_id = 2;
+  common.PaginationParam pagination=3 [(validate.rules).message.required = true];
+}
+
+message ListMessagesResponse {
+    OrderItemMessages messages = 1;
+  
+}
+
+message CreatMessageRequest {
+  string order_id = 1;
+  OrderItemMessage message = 2;
+}
+
+message CreatMessageResponse {
+  string id = 1;  
+}
+
+message UpdateMessageRequest {
+  string id = 1;
+  string order_id = 2;
+  OrderItemMessage message = 3;
+}
+
+message UpdateMessageResponse {
+  int64 updated = 1;
+}
+
+
+message DeleteMessageRequest {
+  string id = 1;
+  string order_id = 2;
+  repeated string ids = 3;
+}
+
+message DeleteMessageResponse {
+  int64 deleted = 1;
+}

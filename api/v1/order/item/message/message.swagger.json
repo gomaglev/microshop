@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "@protomicro: module:\"order/item\" plural=\"orders/items\" description:\"OrderItem service\"",
+    "title": "@protomicro: module:\"order/message\" plural=\"orders/messages\" description:\"OrderMessage service\"",
     "version": "version not set"
   },
   "consumes": [
@@ -11,15 +11,15 @@
     "application/json"
   ],
   "paths": {
-    "/v2/orders/{orderId}/items": {
+    "/v1/orders/{orderId}/messages": {
       "get": {
-        "summary": "list items",
-        "operationId": "ItemService_List",
+        "summary": "list messages",
+        "operationId": "MessageService_List",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/itemOrderItems"
+              "$ref": "#/definitions/messageOrderItemMessages"
             }
           },
           "default": {
@@ -80,17 +80,17 @@
           }
         ],
         "tags": [
-          "ItemService"
+          "MessageService"
         ]
       },
       "post": {
-        "summary": "Create order/item",
-        "operationId": "ItemService_Create",
+        "summary": "Create order/message",
+        "operationId": "MessageService_Create",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/itemv2CreatItemResponse"
+              "$ref": "#/definitions/v1CreatMessageResponse"
             }
           },
           "default": {
@@ -112,24 +112,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/itemv2CreatItemRequest"
+              "$ref": "#/definitions/v1CreatMessageRequest"
             }
           }
         ],
         "tags": [
-          "ItemService"
+          "MessageService"
         ]
       }
     },
-    "/v2/orders/{orderId}/items/{id}": {
+    "/v1/orders/{orderId}/messages/{id}": {
       "get": {
-        "summary": "Get order/item",
-        "operationId": "ItemService_Get",
+        "summary": "Get order/message",
+        "operationId": "MessageService_Get",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/itemOrderItem"
+              "$ref": "#/definitions/messageOrderItemMessage"
             }
           },
           "default": {
@@ -154,17 +154,17 @@
           }
         ],
         "tags": [
-          "ItemService"
+          "MessageService"
         ]
       },
       "delete": {
-        "summary": "Delete order/item",
-        "operationId": "ItemService_Delete",
+        "summary": "Delete order/message",
+        "operationId": "MessageService_Delete",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/itemv2DeleteItemResponse"
+              "$ref": "#/definitions/v1DeleteMessageResponse"
             }
           },
           "default": {
@@ -199,17 +199,17 @@
           }
         ],
         "tags": [
-          "ItemService"
+          "MessageService"
         ]
       },
       "put": {
-        "summary": "Update order/item",
-        "operationId": "ItemService_Update",
+        "summary": "Update order/message",
+        "operationId": "MessageService_Update",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/itemv2UpdateItemResponse"
+              "$ref": "#/definitions/v1UpdateMessageResponse"
             }
           },
           "default": {
@@ -237,12 +237,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/itemv2UpdateItemRequest"
+              "$ref": "#/definitions/v1UpdateMessageRequest"
             }
           }
         ],
         "tags": [
-          "ItemService"
+          "MessageService"
         ]
       }
     }
@@ -290,28 +290,18 @@
         }
       }
     },
-    "itemOrderItem": {
+    "messageOrderItemMessage": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "title": "@inject_tag: faker:\"uuid_hyphenated\""
         },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "title": "@inject_tag: faker:\"oneof: 4.95, 9.99, 31997.97\""
-        },
-        "quantity": {
+        "message": {
           "type": "string",
-          "format": "int64",
-          "title": "@inject_tag: faker:\"oneof: 11, 12\""
+          "title": "@inject_tag: faker:\"paragraph\""
         },
-        "productId": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "orderId": {
+        "itemId": {
           "type": "string",
           "title": "@inject_tag: faker:\"uuid_hyphenated\""
         },
@@ -324,86 +314,19 @@
           "format": "date-time"
         }
       },
-      "title": "OrderItem"
+      "title": "OrderItemMessage"
     },
-    "itemOrderItems": {
+    "messageOrderItemMessages": {
       "type": "object",
       "properties": {
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/itemOrderItem"
+            "$ref": "#/definitions/messageOrderItemMessage"
           }
         },
         "pagination": {
           "$ref": "#/definitions/commonPaginationResult"
-        }
-      }
-    },
-    "itemv2CreatItemRequest": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string"
-        },
-        "item": {
-          "$ref": "#/definitions/itemOrderItem"
-        }
-      }
-    },
-    "itemv2CreatItemResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "itemv2DeleteItemResponse": {
-      "type": "object",
-      "properties": {
-        "deleted": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "itemv2GetItemResponse": {
-      "type": "object",
-      "properties": {
-        "item": {
-          "$ref": "#/definitions/itemOrderItem"
-        }
-      }
-    },
-    "itemv2ListItemsResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "$ref": "#/definitions/itemOrderItems"
-        }
-      }
-    },
-    "itemv2UpdateItemRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "orderId": {
-          "type": "string"
-        },
-        "item": {
-          "$ref": "#/definitions/itemOrderItem"
-        }
-      }
-    },
-    "itemv2UpdateItemResponse": {
-      "type": "object",
-      "properties": {
-        "updated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -434,6 +357,73 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1CreatMessageRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/messageOrderItemMessage"
+        }
+      }
+    },
+    "v1CreatMessageResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteMessageResponse": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GetMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/messageOrderItemMessage"
+        }
+      }
+    },
+    "v1ListMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "$ref": "#/definitions/messageOrderItemMessages"
+        }
+      }
+    },
+    "v1UpdateMessageRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/messageOrderItemMessage"
+        }
+      }
+    },
+    "v1UpdateMessageResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }

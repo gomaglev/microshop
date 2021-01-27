@@ -9,18 +9,18 @@ import (
 	"github.com/gomaglev/protos/pkg/proto/order/item/message"
 )
 
-// IOrderItemMessage interface for device message
+// IOrderItemMessage interface for OrderItemMessage model
 type IOrderItemMessage interface {
-	// List
+	// List   message
 	List(ctx context.Context, params *dto.ListOrderItemMessagesParam, opts ...*common.QueryOptions) (*message.OrderItemMessages, error)
-	// Get by ID
+	// Get    message
 	Get(ctx context.Context, params *dto.GetOrderItemMessageParam) (*message.OrderItemMessage, error)
-	// Create
+	// Create message
 	Create(ctx context.Context, message *message.OrderItemMessage) (*common.IDResult, error)
-	// Update
+	// Update message
 	Update(ctx context.Context, params *dto.UpdateOrderItemMessageParam, message *message.OrderItemMessage) (*int64, error)
-	// Update message columns
+	// Update message by columns
 	UpdateColumns(ctx context.Context, params *dto.UpdateOrderItemMessageParam, values map[string]interface{}) (*int64, error)
-	// Delete
+	// Delete message
 	Delete(ctx context.Context, params *dto.DeleteOrderItemMessageParam) (*int64, error)
 }

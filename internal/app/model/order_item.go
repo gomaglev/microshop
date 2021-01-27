@@ -9,7 +9,7 @@ import (
 	"github.com/gomaglev/protos/pkg/proto/order/item"
 )
 
-// IOrderItem interface for order_items
+// IOrderItem interface for OrderItem model
 type IOrderItem interface {
 	// Query
 	List(ctx context.Context, params *dto.ListOrderItemsParam, opts ...*common.QueryOptions) (*item.OrderItems, error)

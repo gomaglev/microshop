@@ -9,6 +9,7 @@ import (
 	"github.com/gomaglev/microshop/internal/app/injector"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
 	"github.com/gomaglev/microshop/internal/app/service/v1/order"
+	order2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
 )
 
 // Injectors from wire.go:
@@ -24,8 +25,12 @@ func BuildMockInjector() (*MockInjector, func(), error) {
 	orderService := &order.OrderService{
 		OrderModel: modelOrder,
 	}
+	orderOrderService := &order2.OrderService{
+		OrderModel: modelOrder,
+	}
 	mockInjector := &MockInjector{
-		OrderService: orderService,
+		OrderServiceV1: orderService,
+		OrderServiceV2: orderOrderService,
 	}
 	return mockInjector, func() {
 		cleanup()
