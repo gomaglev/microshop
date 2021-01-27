@@ -3,10 +3,10 @@ package model
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/v1/internal/app/dto"
+	"github.com/gomaglev/microshop/internal/app/dto"
 
-	"github.com/gomaglev/protos/pkg/proto/common/v1"
-	"github.com/gomaglev/protos/pkg/proto/order/item/v1"
+	"github.com/gomaglev/protos/pkg/proto/common"
+	"github.com/gomaglev/protos/pkg/proto/order/item"
 )
 
 // IOrderItem interface for order_items

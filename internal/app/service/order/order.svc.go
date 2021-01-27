@@ -3,9 +3,9 @@ package order
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/v1/internal/app/dto"
-	"github.com/gomaglev/microshop/v1/internal/app/model"
-	iutil "github.com/gomaglev/microshop/v1/internal/pkg/util"
+	"github.com/gomaglev/microshop/internal/app/dto"
+	"github.com/gomaglev/microshop/internal/app/model"
+	iutil "github.com/gomaglev/microshop/internal/pkg/util"
 
 	"github.com/google/wire"
 )

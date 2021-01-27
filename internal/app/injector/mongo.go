@@ -3,7 +3,7 @@ package injector
 import (
 	"context"
 
-	imongo "github.com/gomaglev/microshop/v1/internal/app/model/mongo"
+	imongo "github.com/gomaglev/microshop/internal/app/model/mongo"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )

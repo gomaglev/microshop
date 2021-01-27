@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	item "github.com/gomaglev/microshop/v1/internal/app/service/order/item/v1"
-	order "github.com/gomaglev/microshop/v1/internal/app/service/order/v1"
+	order "github.com/gomaglev/microshop/internal/app/service/order"
+	item "github.com/gomaglev/microshop/internal/app/service/order/item"
 
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
+	"github.com/gomaglev/microshop/internal/pkg/config"
 
-	"github.com/gomaglev/microshop/v1/internal/pkg/server/rpc"
+	"github.com/gomaglev/microshop/internal/pkg/server/rpc"
 
 	"github.com/google/wire"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"

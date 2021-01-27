@@ -1,13 +1,13 @@
 syntax = "proto3";
 
 // @protomicro: app:"app" module:"order/item" plural="orders" description:"Order service"
-package pkg.proto.order.v1;
-option go_package = "service/order/v1;order";
+package pkg.proto.order;
+option go_package = "service/order;order";
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-import "pkg/proto/order/v1/types.proto";
-import "pkg/proto/common/v1/common.proto";
+import "pkg/proto/order/types.proto";
+import "pkg/proto/common/common.proto";
 
 service OrderService {
   // Get order
@@ -68,7 +68,7 @@ message ListOrdersRequest {
   repeated string ids = 1;
   string application_id = 2;
   string account_id = 3;
-  common.v1.PaginationParam pagination=4 [(validate.rules).message.required = true];
+  common.PaginationParam pagination=4 [(validate.rules).message.required = true];
 }
 
 message ListOrdersResponse {

@@ -3,8 +3,8 @@ package mongo
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/pkg/logger"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

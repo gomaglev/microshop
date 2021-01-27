@@ -39,7 +39,7 @@ func NewItemServiceClient(cc grpc.ClientConnInterface) ItemServiceClient {
 
 func (c *itemServiceClient) Get(ctx context.Context, in *GetItemRequest, opts ...grpc.CallOption) (*GetItemResponse, error) {
 	out := new(GetItemResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.v1.ItemService/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.ItemService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *itemServiceClient) Get(ctx context.Context, in *GetItemRequest, opts ..
 
 func (c *itemServiceClient) List(ctx context.Context, in *ListItemsRequest, opts ...grpc.CallOption) (*ListItemsResponse, error) {
 	out := new(ListItemsResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.v1.ItemService/List", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.ItemService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *itemServiceClient) List(ctx context.Context, in *ListItemsRequest, opts
 
 func (c *itemServiceClient) Create(ctx context.Context, in *CreatItemRequest, opts ...grpc.CallOption) (*CreatItemResponse, error) {
 	out := new(CreatItemResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.v1.ItemService/Create", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.ItemService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (c *itemServiceClient) Create(ctx context.Context, in *CreatItemRequest, op
 
 func (c *itemServiceClient) Update(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*UpdateItemResponse, error) {
 	out := new(UpdateItemResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.v1.ItemService/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.ItemService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c *itemServiceClient) Update(ctx context.Context, in *UpdateItemRequest, o
 
 func (c *itemServiceClient) Delete(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*DeleteItemResponse, error) {
 	out := new(DeleteItemResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.v1.ItemService/Delete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.order.item.ItemService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ func _ItemService_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.order.item.v1.ItemService/Get",
+		FullMethod: "/pkg.proto.order.item.ItemService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ItemServiceServer).Get(ctx, req.(*GetItemRequest))
@@ -157,7 +157,7 @@ func _ItemService_List_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.order.item.v1.ItemService/List",
+		FullMethod: "/pkg.proto.order.item.ItemService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ItemServiceServer).List(ctx, req.(*ListItemsRequest))
@@ -175,7 +175,7 @@ func _ItemService_Create_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.order.item.v1.ItemService/Create",
+		FullMethod: "/pkg.proto.order.item.ItemService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ItemServiceServer).Create(ctx, req.(*CreatItemRequest))
@@ -193,7 +193,7 @@ func _ItemService_Update_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.order.item.v1.ItemService/Update",
+		FullMethod: "/pkg.proto.order.item.ItemService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ItemServiceServer).Update(ctx, req.(*UpdateItemRequest))
@@ -211,7 +211,7 @@ func _ItemService_Delete_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.order.item.v1.ItemService/Delete",
+		FullMethod: "/pkg.proto.order.item.ItemService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ItemServiceServer).Delete(ctx, req.(*DeleteItemRequest))
@@ -220,7 +220,7 @@ func _ItemService_Delete_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 var _ItemService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pkg.proto.order.item.v1.ItemService",
+	ServiceName: "pkg.proto.order.item.ItemService",
 	HandlerType: (*ItemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -245,5 +245,5 @@ var _ItemService_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/order/item/v1/item.proto",
+	Metadata: "api/order/item/item.proto",
 }

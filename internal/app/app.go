@@ -8,10 +8,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gomaglev/microshop/v1/internal/app/injector"
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	iutil "github.com/gomaglev/microshop/v1/internal/pkg/util"
-	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/internal/app/injector"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	iutil "github.com/gomaglev/microshop/internal/pkg/util"
+	"github.com/gomaglev/microshop/pkg/logger"
 
 	"github.com/google/gops/agent"
 	"google.golang.org/grpc"

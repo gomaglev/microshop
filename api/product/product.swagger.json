@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "@protomicro: app:\"app\" module:\"order/item\" plural=\"orders\" description:\"Order service\"",
+    "title": "@protomicro: app:\"app\" module:\"product\" plural=\"products\" description:\"Product service\"",
     "version": "version not set"
   },
   "consumes": [
@@ -11,15 +11,15 @@
     "application/json"
   ],
   "paths": {
-    "/v1/api/orders": {
+    "/v1/api/products": {
       "get": {
-        "summary": "List orders",
-        "operationId": "OrderService_List",
+        "summary": "List products",
+        "operationId": "ProductService_List",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1Orders"
+              "$ref": "#/definitions/productProducts"
             }
           },
           "default": {
@@ -86,17 +86,17 @@
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       },
       "post": {
-        "summary": "Create order",
-        "operationId": "OrderService_Create",
+        "summary": "Create product",
+        "operationId": "ProductService_Create",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreatOrderResponse"
+              "$ref": "#/definitions/productCreatProductResponse"
             }
           },
           "default": {
@@ -112,24 +112,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1CreatOrderRequest"
+              "$ref": "#/definitions/productCreatProductRequest"
             }
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       }
     },
-    "/v1/api/orders/{id}": {
+    "/v1/api/products/{id}": {
       "get": {
-        "summary": "Get order",
-        "operationId": "OrderService_Get",
+        "summary": "Get product",
+        "operationId": "ProductService_Get",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1Order"
+              "$ref": "#/definitions/productProduct"
             }
           },
           "default": {
@@ -148,17 +148,17 @@
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       },
       "delete": {
-        "summary": "Delete order",
-        "operationId": "OrderService_Delete",
+        "summary": "Delete product",
+        "operationId": "ProductService_Delete",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1DeleteOrderResponse"
+              "$ref": "#/definitions/productDeleteProductResponse"
             }
           },
           "default": {
@@ -177,17 +177,17 @@
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       },
       "put": {
-        "summary": "Update order",
-        "operationId": "OrderService_Update",
+        "summary": "Update product",
+        "operationId": "ProductService_Update",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1UpdateOrderResponse"
+              "$ref": "#/definitions/productUpdateProductResponse"
             }
           },
           "default": {
@@ -209,22 +209,22 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1Order"
+              "$ref": "#/definitions/productProduct"
             }
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       },
       "patch": {
-        "summary": "Update order",
-        "operationId": "OrderService_Update2",
+        "summary": "Update product",
+        "operationId": "ProductService_Update2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1UpdateOrderResponse"
+              "$ref": "#/definitions/productUpdateProductResponse"
             }
           },
           "default": {
@@ -246,17 +246,191 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1UpdateOrderRequest"
+              "$ref": "#/definitions/productUpdateProductRequest"
             }
           }
         ],
         "tags": [
-          "OrderService"
+          "ProductService"
         ]
       }
     }
   },
   "definitions": {
+    "commonPaginationParam": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "type": "boolean"
+        },
+        "countOnly": {
+          "type": "boolean"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cursor": {
+          "type": "string"
+        }
+      }
+    },
+    "commonPaginationResult": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cursor": {
+          "type": "string"
+        }
+      }
+    },
+    "productCreatProductRequest": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/productProduct"
+        }
+      }
+    },
+    "productCreatProductResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "productDeleteProductResponse": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "productGetProductResponse": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/productProduct"
+        }
+      }
+    },
+    "productListProductsResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "$ref": "#/definitions/productProducts"
+        }
+      }
+    },
+    "productProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"uuid_hyphenated\""
+        },
+        "name": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"name\""
+        },
+        "sku": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"word\""
+        },
+        "url": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"url\""
+        },
+        "description": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"paragraph\""
+        },
+        "price": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"oneof: 4.95, 9.99, 31997.97\""
+        },
+        "stock": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"oneof: 17, 18\""
+        },
+        "categoryId": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"uuid_hyphenated\""
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "@inject_tag: faker:\"-\""
+        },
+        "deliveredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Product"
+    },
+    "productProducts": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productProduct"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/commonPaginationResult"
+        }
+      }
+    },
+    "productUpdateProductRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "product": {
+          "$ref": "#/definitions/productProduct"
+        }
+      }
+    },
+    "productUpdateProductResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -284,153 +458,6 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v1CreatOrderRequest": {
-      "type": "object",
-      "properties": {
-        "order": {
-          "$ref": "#/definitions/v1Order"
-        }
-      }
-    },
-    "v1CreatOrderResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "v1DeleteOrderResponse": {
-      "type": "object",
-      "properties": {
-        "deleted": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "v1GetOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order": {
-          "$ref": "#/definitions/v1Order"
-        }
-      }
-    },
-    "v1ListOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "$ref": "#/definitions/v1Orders"
-        }
-      }
-    },
-    "v1Order": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "status": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"oneof: 0,1,2,3,4,5\""
-        },
-        "deliveredAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "userId": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "title": "Order"
-    },
-    "v1Orders": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Order"
-          }
-        },
-        "pagination": {
-          "$ref": "#/definitions/v1PaginationResult"
-        }
-      }
-    },
-    "v1PaginationParam": {
-      "type": "object",
-      "properties": {
-        "pagination": {
-          "type": "boolean"
-        },
-        "countOnly": {
-          "type": "boolean"
-        },
-        "page": {
-          "type": "string",
-          "format": "int64"
-        },
-        "pageSize": {
-          "type": "string",
-          "format": "int64"
-        },
-        "cursor": {
-          "type": "string"
-        }
-      }
-    },
-    "v1PaginationResult": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "string",
-          "format": "int64"
-        },
-        "page": {
-          "type": "string",
-          "format": "int64"
-        },
-        "page_size": {
-          "type": "string",
-          "format": "int64"
-        },
-        "cursor": {
-          "type": "string"
-        }
-      }
-    },
-    "v1UpdateOrderRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "order": {
-          "$ref": "#/definitions/v1Order"
-        }
-      }
-    },
-    "v1UpdateOrderResponse": {
-      "type": "object",
-      "properties": {
-        "updated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     }

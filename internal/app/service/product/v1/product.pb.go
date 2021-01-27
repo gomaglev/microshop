@@ -11,7 +11,7 @@ package product
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	proto "github.com/golang/protobuf/proto"
-	v11 "github.com/gomaglev/protos/pkg/proto/common/v1"
+	v11 "github.com/gomaglev/protos/pkg/proto/common"
 	v1 "github.com/gomaglev/protos/pkg/proto/product/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -668,12 +668,12 @@ var file_api_product_v1_product_proto_goTypes = []interface{}{
 	(*DeleteProductRequest)(nil),  // 8: pkg.proto.product.v1.DeleteProductRequest
 	(*DeleteProductResponse)(nil), // 9: pkg.proto.product.v1.DeleteProductResponse
 	(*v1.Product)(nil),            // 10: pkg.proto.product.v1.Product
-	(*v11.PaginationParam)(nil),   // 11: pkg.proto.common.v1.PaginationParam
+	(*v11.PaginationParam)(nil),   // 11: pkg.proto.common.PaginationParam
 	(*v1.Products)(nil),           // 12: pkg.proto.product.v1.Products
 }
 var file_api_product_v1_product_proto_depIdxs = []int32{
 	10, // 0: pkg.proto.product.v1.GetProductResponse.product:type_name -> pkg.proto.product.v1.Product
-	11, // 1: pkg.proto.product.v1.ListProductsRequest.pagination:type_name -> pkg.proto.common.v1.PaginationParam
+	11, // 1: pkg.proto.product.v1.ListProductsRequest.pagination:type_name -> pkg.proto.common.PaginationParam
 	12, // 2: pkg.proto.product.v1.ListProductsResponse.products:type_name -> pkg.proto.product.v1.Products
 	10, // 3: pkg.proto.product.v1.CreatProductRequest.product:type_name -> pkg.proto.product.v1.Product
 	10, // 4: pkg.proto.product.v1.UpdateProductRequest.product:type_name -> pkg.proto.product.v1.Product

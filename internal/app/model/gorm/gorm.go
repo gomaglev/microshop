@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/entity"
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/pkg/logger"
 
 	// Import the driver
 	"gorm.io/driver/mysql"

@@ -10,7 +10,7 @@ import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	proto "github.com/golang/protobuf/proto"
 	v1 "github.com/gomaglev/protos/pkg/proto/category/v1"
-	v11 "github.com/gomaglev/protos/pkg/proto/common/v1"
+	v11 "github.com/gomaglev/protos/pkg/proto/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -673,12 +673,12 @@ var file_api_category_v1_category_proto_goTypes = []interface{}{
 	(*DeleteCategoryRequest)(nil),  // 8: pkg.proto.category.v1.DeleteCategoryRequest
 	(*DeleteCategoryResponse)(nil), // 9: pkg.proto.category.v1.DeleteCategoryResponse
 	(*v1.Category)(nil),            // 10: pkg.proto.category.v1.Category
-	(*v11.PaginationParam)(nil),    // 11: pkg.proto.common.v1.PaginationParam
+	(*v11.PaginationParam)(nil),    // 11: pkg.proto.common.PaginationParam
 	(*v1.Categories)(nil),          // 12: pkg.proto.category.v1.Categories
 }
 var file_api_category_v1_category_proto_depIdxs = []int32{
 	10, // 0: pkg.proto.category.v1.GetCategoryResponse.category:type_name -> pkg.proto.category.v1.Category
-	11, // 1: pkg.proto.category.v1.ListCategoriesRequest.pagination:type_name -> pkg.proto.common.v1.PaginationParam
+	11, // 1: pkg.proto.category.v1.ListCategoriesRequest.pagination:type_name -> pkg.proto.common.PaginationParam
 	12, // 2: pkg.proto.category.v1.ListCategoriesResponse.categories:type_name -> pkg.proto.category.v1.Categories
 	10, // 3: pkg.proto.category.v1.CreatCategoryRequest.category:type_name -> pkg.proto.category.v1.Category
 	10, // 4: pkg.proto.category.v1.UpdateCategoryRequest.category:type_name -> pkg.proto.category.v1.Category

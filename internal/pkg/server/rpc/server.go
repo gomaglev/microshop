@@ -7,9 +7,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	"github.com/gomaglev/microshop/v1/pkg/grpclimit"
-	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/pkg/grpclimit"
+	"github.com/gomaglev/microshop/pkg/logger"
 
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 

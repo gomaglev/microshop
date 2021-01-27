@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package pkg.proto.category.v1;
-option go_package = "service/category/v1;category";
+package pkg.proto.category;
+option go_package = "service/category;category";
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-import "pkg/proto/category/v1/types.proto";
-import "pkg/proto/common/v1/common.proto";
+import "pkg/proto/category/types.proto";
+import "pkg/proto/common/common.proto";
 
 service CategoryService {
   // Get category
@@ -71,7 +71,7 @@ message ListCategoriesRequest {
   repeated string ids = 1;
   string application_id = 2;
   string account_id = 3;
-  common.v1.PaginationParam pagination=4 [(validate.rules).message.required = true];
+  common.PaginationParam pagination=4 [(validate.rules).message.required = true];
 }
 
 message ListCategoriesResponse {

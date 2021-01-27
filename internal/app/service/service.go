@@ -1,8 +1,8 @@
 package service
 
 import (
-	item "github.com/gomaglev/microshop/v1/internal/app/service/order/item/v1"
-	order "github.com/gomaglev/microshop/v1/internal/app/service/order/v1"
+	order "github.com/gomaglev/microshop/internal/app/service/order"
+	item "github.com/gomaglev/microshop/internal/app/service/order/item"
 
 	"github.com/google/wire"
 )

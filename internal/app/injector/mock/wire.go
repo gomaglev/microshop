@@ -4,9 +4,9 @@
 package mock
 
 import (
-	"github.com/gomaglev/microshop/v1/internal/app/injector"
-	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/model"
-	"github.com/gomaglev/microshop/v1/internal/app/service"
+	"github.com/gomaglev/microshop/internal/app/injector"
+	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
+	"github.com/gomaglev/microshop/internal/app/service"
 	"github.com/google/wire"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/gomaglev/microshop/v1/pkg/icontext"
+	"github.com/gomaglev/microshop/pkg/icontext"
 
 	"gorm.io/gorm"
 )

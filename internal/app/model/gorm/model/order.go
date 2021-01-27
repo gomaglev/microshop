@@ -3,13 +3,12 @@ package model
 import (
 	"context"
 
-	"github.com/bmeg/grip/util"
-	"github.com/gomaglev/microshop/v1/internal/app/dto"
-	"github.com/gomaglev/microshop/v1/internal/app/model"
-	"github.com/gomaglev/microshop/v1/internal/app/model/gorm/entity"
+	"github.com/gomaglev/microshop/internal/app/dto"
+	"github.com/gomaglev/microshop/internal/app/model"
+	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
 
-	"github.com/gomaglev/protos/pkg/proto/common/v1"
-	"github.com/gomaglev/protos/pkg/proto/order/v1"
+	"github.com/gomaglev/protos/pkg/proto/common"
+	"github.com/gomaglev/protos/pkg/proto/order"
 	"gorm.io/gorm"
 
 	"github.com/google/wire"

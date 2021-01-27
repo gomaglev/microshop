@@ -3,8 +3,8 @@ package model
 import (
 	"context"
 
-	"github.com/gomaglev/microshop/v1/internal/app/model"
-	"github.com/gomaglev/microshop/v1/pkg/icontext"
+	"github.com/gomaglev/microshop/internal/app/model"
+	"github.com/gomaglev/microshop/pkg/icontext"
 
 	"github.com/google/wire"
 	"go.mongodb.org/mongo-driver/mongo"

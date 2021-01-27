@@ -19,7 +19,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1OrderItems"
+              "$ref": "#/definitions/itemOrderItems"
             }
           },
           "default": {
@@ -90,7 +90,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreatItemResponse"
+              "$ref": "#/definitions/itemCreatItemResponse"
             }
           },
           "default": {
@@ -112,7 +112,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1CreatItemRequest"
+              "$ref": "#/definitions/itemCreatItemRequest"
             }
           }
         ],
@@ -129,7 +129,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/v1OrderItem"
+              "$ref": "#/definitions/itemOrderItem"
             }
           },
           "default": {
@@ -164,7 +164,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1DeleteItemResponse"
+              "$ref": "#/definitions/itemDeleteItemResponse"
             }
           },
           "default": {
@@ -199,7 +199,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1UpdateItemResponse"
+              "$ref": "#/definitions/itemUpdateItemResponse"
             }
           },
           "default": {
@@ -227,7 +227,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1UpdateItemRequest"
+              "$ref": "#/definitions/itemUpdateItemRequest"
             }
           }
         ],
@@ -238,6 +238,165 @@
     }
   },
   "definitions": {
+    "commonPaginationParam": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "type": "boolean"
+        },
+        "countOnly": {
+          "type": "boolean"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pageSize": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cursor": {
+          "type": "string"
+        }
+      }
+    },
+    "commonPaginationResult": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cursor": {
+          "type": "string"
+        }
+      }
+    },
+    "itemCreatItemRequest": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "item": {
+          "$ref": "#/definitions/itemOrderItem"
+        }
+      }
+    },
+    "itemCreatItemResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "itemDeleteItemResponse": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "itemGetItemResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/itemOrderItem"
+        }
+      }
+    },
+    "itemListItemsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "$ref": "#/definitions/itemOrderItems"
+        }
+      }
+    },
+    "itemOrderItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"uuid_hyphenated\""
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "@inject_tag: faker:\"oneof: 4.95, 9.99, 31997.97\""
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "@inject_tag: faker:\"oneof: 11, 12\""
+        },
+        "productId": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"uuid_hyphenated\""
+        },
+        "orderId": {
+          "type": "string",
+          "title": "@inject_tag: faker:\"uuid_hyphenated\""
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "itemOrderItems": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/itemOrderItem"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/commonPaginationResult"
+        }
+      }
+    },
+    "itemUpdateItemRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "item": {
+          "$ref": "#/definitions/itemOrderItem"
+        }
+      }
+    },
+    "itemUpdateItemResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -265,165 +424,6 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v1CreatItemRequest": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string"
-        },
-        "item": {
-          "$ref": "#/definitions/v1OrderItem"
-        }
-      }
-    },
-    "v1CreatItemResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "v1DeleteItemResponse": {
-      "type": "object",
-      "properties": {
-        "deleted": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "v1GetItemResponse": {
-      "type": "object",
-      "properties": {
-        "item": {
-          "$ref": "#/definitions/v1OrderItem"
-        }
-      }
-    },
-    "v1ListItemsResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "$ref": "#/definitions/v1OrderItems"
-        }
-      }
-    },
-    "v1OrderItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "orderId": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "title": "@inject_tag: faker:\"oneof: 4.95, 9.99, 31997.97\""
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "@inject_tag: faker:\"oneof: 11, 12\""
-        },
-        "productId": {
-          "type": "string",
-          "title": "@inject_tag: faker:\"uuid_hyphenated\""
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "title": "OrderItem"
-    },
-    "v1OrderItems": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1OrderItem"
-          }
-        },
-        "pagination": {
-          "$ref": "#/definitions/v1PaginationResult"
-        }
-      }
-    },
-    "v1PaginationParam": {
-      "type": "object",
-      "properties": {
-        "pagination": {
-          "type": "boolean"
-        },
-        "countOnly": {
-          "type": "boolean"
-        },
-        "page": {
-          "type": "string",
-          "format": "int64"
-        },
-        "pageSize": {
-          "type": "string",
-          "format": "int64"
-        },
-        "cursor": {
-          "type": "string"
-        }
-      }
-    },
-    "v1PaginationResult": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "type": "string",
-          "format": "int64"
-        },
-        "page": {
-          "type": "string",
-          "format": "int64"
-        },
-        "page_size": {
-          "type": "string",
-          "format": "int64"
-        },
-        "cursor": {
-          "type": "string"
-        }
-      }
-    },
-    "v1UpdateItemRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "orderId": {
-          "type": "string"
-        },
-        "item": {
-          "$ref": "#/definitions/v1OrderItem"
-        }
-      }
-    },
-    "v1UpdateItemResponse": {
-      "type": "object",
-      "properties": {
-        "updated": {
-          "type": "string",
-          "format": "int64"
         }
       }
     }

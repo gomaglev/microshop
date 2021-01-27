@@ -1,8 +1,8 @@
 package injector
 
 import (
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	"github.com/gomaglev/microshop/v1/pkg/grpclimit"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/pkg/grpclimit"
 
 	"go.uber.org/ratelimit"
 )

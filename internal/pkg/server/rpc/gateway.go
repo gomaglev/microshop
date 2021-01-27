@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gomaglev/microshop/v1/internal/pkg/config"
-	"github.com/gomaglev/microshop/v1/pkg/logger"
+	"github.com/gomaglev/microshop/internal/pkg/config"
+	"github.com/gomaglev/microshop/pkg/logger"
 
 	"github.com/google/wire"
 	"github.com/gorilla/mux"
