@@ -10,6 +10,7 @@ import (
 	"github.com/gomaglev/microshop/internal/pkg/config"
 	"github.com/gomaglev/microshop/pkg/grpclimit"
 	"github.com/gomaglev/microshop/pkg/logger"
+	"go.uber.org/ratelimit"
 
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 
@@ -31,7 +32,6 @@ var ServerSet = wire.NewSet(wire.Struct(new(Server), "*"))
 // Server
 type Server struct {
 	Register IRegister
-	Limiter  grpclimit.Limiter
 }
 
 // Setup configures the API package.
@@ -55,11 +55,15 @@ func (s *Server) Setup(ctx context.Context) (*grpc.Server, func()) {
 			grpc_logrus.StreamServerInterceptor(logEntry, logOpts...))
 	}
 
+	limiter := grpclimit.Limiter{
+		Limiter: ratelimit.New(config.C.GRPC.RateLimitCount),
+	}
+
 	if cfg.Interceptor.EnableRateLimit {
 		unaryServerInterceptors = append(unaryServerInterceptors,
-			grpc_ratelimit.UnaryServerInterceptor(&s.Limiter))
+			grpc_ratelimit.UnaryServerInterceptor(&limiter))
 		streamServerInterceptors = append(streamServerInterceptors,
-			grpc_ratelimit.StreamServerInterceptor(&s.Limiter))
+			grpc_ratelimit.StreamServerInterceptor(&limiter))
 	}
 
 	if cfg.Interceptor.EnableRecovery {

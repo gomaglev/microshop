@@ -168,7 +168,6 @@ func TestOrderServiceV2(t *testing.T) {
 		assert.Equal(t, int32(1), listRes.Orders.Pagination.Page)
 		assert.Equal(t, 2, len(listRes.Orders.List))
 	})
-
 	t.Run("delete orders", func(t *testing.T) {
 		// delete first record
 		deleted, err := orderServiceV2.Delete(ctx, &orderv2.DeleteOrderRequest{

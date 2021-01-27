@@ -18,6 +18,24 @@ import (
 	"gorm.io/gorm"
 )
 
+// InitGormDB 初始化gorm存储
+func InitGormDB() (*gorm.DB, func(), error) {
+	cfg := config.C.Gorm
+	db, cleanFunc, err := NewDB()
+	if err != nil {
+		return nil, cleanFunc, err
+	}
+
+	if cfg.EnableAutoMigrate {
+		err = AutoMigrate(db)
+		if err != nil {
+			return nil, cleanFunc, err
+		}
+	}
+
+	return db, cleanFunc, nil
+}
+
 // NewDB 创建DB实例
 func NewDB() (*gorm.DB, func(), error) {
 	var (

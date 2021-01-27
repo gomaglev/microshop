@@ -6,6 +6,7 @@
 package injector
 
 import (
+	"github.com/gomaglev/microshop/internal/app/model/gorm"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
 	"github.com/gomaglev/microshop/internal/app/service"
 	"github.com/gomaglev/microshop/internal/app/service/v1/order"
@@ -17,7 +18,7 @@ import (
 // Injectors from wire.go:
 
 func BuildInjector() (*Injector, func(), error) {
-	db, cleanup, err := InitGormDB()
+	db, cleanup, err := gorm.InitGormDB()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,10 +42,8 @@ func BuildInjector() (*Injector, func(), error) {
 		OrderServiceV1: orderService,
 		OrderServiceV2: orderOrderService,
 	}
-	limiter := InitGrpcLimiter()
 	server := &rpc.Server{
 		Register: register,
-		Limiter:  limiter,
 	}
 	gateway := &rpc.Gateway{
 		Register: register,

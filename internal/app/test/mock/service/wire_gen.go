@@ -6,7 +6,7 @@
 package mock
 
 import (
-	"github.com/gomaglev/microshop/internal/app/injector"
+	"github.com/gomaglev/microshop/internal/app/model/gorm"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
 	"github.com/gomaglev/microshop/internal/app/service/v1/order"
 	order2 "github.com/gomaglev/microshop/internal/app/service/v2/order"
@@ -15,7 +15,7 @@ import (
 // Injectors from wire.go:
 
 func BuildMockInjector() (*MockInjector, func(), error) {
-	db, cleanup, err := injector.InitGormDB()
+	db, cleanup, err := gorm.InitGormDB()
 	if err != nil {
 		return nil, nil, err
 	}

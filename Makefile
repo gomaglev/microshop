@@ -42,7 +42,7 @@ start:
 	go run ./cmd/microshop/main.go start
 
 wire: ## Run the container
-	wire ./internal/app/injector ./internal/app/injector/mock
+	wire ./internal/app/injector ./internal/app/test/mock/model ./internal/app/test/mock/service
 
 run: ## Run the container
 	docker run \

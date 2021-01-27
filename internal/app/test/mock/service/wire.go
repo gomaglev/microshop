@@ -4,16 +4,16 @@
 package mock
 
 import (
-	"github.com/gomaglev/microshop/internal/app/injector"
+	"github.com/gomaglev/microshop/internal/app/model/gorm"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/model"
 	"github.com/gomaglev/microshop/internal/app/service"
 	"github.com/google/wire"
 )
 
-// BuildMockInjector
+// BuildMockInjector for tests in api
 func BuildMockInjector() (*MockInjector, func(), error) {
 	wire.Build(
-		injector.InitGormDB,
+		gorm.InitGormDB,
 		model.ModelSet,
 		service.ServiceSet,
 		MockInjectorSet,

@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	configFile = "../../../configs/config.toml"
+	configFile = "../../../../../configs/config.toml"
 )
 
 var idFunc = func() string {
@@ -77,9 +77,7 @@ func NewShortID() string {
 }
 
 func InitConfig() context.Context {
-	// 初始化配置文件
 	config.MustLoad(configFile)
-
 	config.C.RunMode = "test"
 	config.C.Log.Level = 2
 	config.C.Gorm.Debug = false

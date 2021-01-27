@@ -4,6 +4,7 @@
 package injector
 
 import (
+	gorm "github.com/gomaglev/microshop/internal/app/model/gorm"
 	gormModel "github.com/gomaglev/microshop/internal/app/model/gorm/model"
 	"github.com/gomaglev/microshop/internal/app/service"
 	"github.com/gomaglev/microshop/internal/pkg/server"
@@ -14,10 +15,11 @@ import (
 // BuildInjector
 func BuildInjector() (*Injector, func(), error) {
 	wire.Build(
-		InitGormDB,
-		InitGrpcLimiter,
-		gormModel.ModelSet,
+		// redis.InitCache,
+		// mongo.InitMongo,
 		// mongoModel.ModelSet,
+		gorm.InitGormDB,
+		gormModel.ModelSet,
 		service.ServiceSet,
 		server.ServerSet,
 		InjectorSet,

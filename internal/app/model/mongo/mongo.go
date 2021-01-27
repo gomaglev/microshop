@@ -10,6 +10,20 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// InitMongo initiate Mongo storage
+func InitMongo() (*mongo.Client, func(), error) {
+	client, cleanFunc, err := NewClient()
+	if err != nil {
+		return nil, cleanFunc, err
+	}
+
+	err = CreateIndexes(context.Background(), client)
+	if err != nil {
+		return nil, cleanFunc, err
+	}
+	return client, cleanFunc, nil
+}
+
 // NewClient create Mongo client
 func NewClient() (*mongo.Client, func(), error) {
 
