@@ -16,6 +16,7 @@ type GetOrderItemParam struct {
 // ListOrderItemsParam for bll inner usage
 type ListOrderItemsParam struct {
 	Pagination *common.PaginationParam
+	Id         string
 	Ids        []string
 }
 
@@ -32,7 +33,8 @@ type UpdateOrderItemParam struct {
 
 // DeleteOrderItemParam
 type DeleteOrderItemParam struct {
-	Id string
+	Id  string
+	Ids []string
 }
 
 // ProtoOrderItems

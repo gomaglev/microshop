@@ -23,7 +23,7 @@ require (
 	github.com/golang/protobuf v1.4.3
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/gomaglev/protoc-go-inject-tag v1.1.1
-	github.com/gomaglev/protos v1.0.3
+	github.com/gomaglev/protos v1.0.7
 	github.com/google/gops v0.3.14
 	github.com/google/uuid v1.1.2
 	github.com/google/wire v0.5.0

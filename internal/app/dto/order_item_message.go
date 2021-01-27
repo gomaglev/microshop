@@ -16,9 +16,10 @@ type GetOrderItemMessageParam struct {
 // ListOrderItemMessagesParam for bll inner usage
 type ListOrderItemMessagesParam struct {
 	Pagination *common.PaginationParam
+	Id         string
 	OrderId    string
 	ItemId     string
-	Ids        string
+	Ids        []string
 }
 
 // ListOrderItemMessagesOptions
@@ -34,7 +35,8 @@ type UpdateOrderItemMessageParam struct {
 
 // DeleteOrderItemMessageParam
 type DeleteOrderItemMessageParam struct {
-	Id string
+	Id  string
+	Ids string
 }
 
 // ProtoOrderItemMessages

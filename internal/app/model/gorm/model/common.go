@@ -12,6 +12,10 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	maxPageSize = 1000
+)
+
 // TransFunc
 type TransFunc func(context.Context) error
 
@@ -36,6 +40,13 @@ func WrapPageQuery(ctx context.Context,
 	opt *common.QueryOptions,
 	out interface{},
 ) (*common.PaginationResult, error) {
+	if pp == nil {
+		pp = &common.PaginationParam{
+			Pagination: false,
+			Page:       1,
+			PageSize:   maxPageSize,
+		}
+	}
 	if pp.CountOnly {
 		var count int64
 		err := db.Count(&count).Error
@@ -52,8 +63,8 @@ func WrapPageQuery(ctx context.Context,
 
 	return &common.PaginationResult{
 		Total:    total,
-		Page:     int64(pp.Page),
-		PageSize: int64(pp.PageSize),
+		Page:     int32(pp.Page),
+		PageSize: int32(pp.PageSize),
 		Cursor:   pp.Cursor,
 	}, nil
 }

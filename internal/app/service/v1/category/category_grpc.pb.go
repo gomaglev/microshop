@@ -39,7 +39,7 @@ func NewCategoryServiceClient(cc grpc.ClientConnInterface) CategoryServiceClient
 
 func (c *categoryServiceClient) Get(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*GetCategoryResponse, error) {
 	out := new(GetCategoryResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.category.CategoryService/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.category.v1.CategoryService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *categoryServiceClient) Get(ctx context.Context, in *GetCategoryRequest,
 
 func (c *categoryServiceClient) List(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
 	out := new(ListCategoriesResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.category.CategoryService/List", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.category.v1.CategoryService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *categoryServiceClient) List(ctx context.Context, in *ListCategoriesRequ
 
 func (c *categoryServiceClient) Create(ctx context.Context, in *CreatCategoryRequest, opts ...grpc.CallOption) (*CreatCategoryResponse, error) {
 	out := new(CreatCategoryResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.category.CategoryService/Create", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.category.v1.CategoryService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (c *categoryServiceClient) Create(ctx context.Context, in *CreatCategoryReq
 
 func (c *categoryServiceClient) Update(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*UpdateCategoryResponse, error) {
 	out := new(UpdateCategoryResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.category.CategoryService/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.category.v1.CategoryService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c *categoryServiceClient) Update(ctx context.Context, in *UpdateCategoryRe
 
 func (c *categoryServiceClient) Delete(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*DeleteCategoryResponse, error) {
 	out := new(DeleteCategoryResponse)
-	err := c.cc.Invoke(ctx, "/pkg.proto.category.CategoryService/Delete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pkg.proto.category.v1.CategoryService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ func _CategoryService_Get_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.category.CategoryService/Get",
+		FullMethod: "/pkg.proto.category.v1.CategoryService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CategoryServiceServer).Get(ctx, req.(*GetCategoryRequest))
@@ -157,7 +157,7 @@ func _CategoryService_List_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.category.CategoryService/List",
+		FullMethod: "/pkg.proto.category.v1.CategoryService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CategoryServiceServer).List(ctx, req.(*ListCategoriesRequest))
@@ -175,7 +175,7 @@ func _CategoryService_Create_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.category.CategoryService/Create",
+		FullMethod: "/pkg.proto.category.v1.CategoryService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CategoryServiceServer).Create(ctx, req.(*CreatCategoryRequest))
@@ -193,7 +193,7 @@ func _CategoryService_Update_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.category.CategoryService/Update",
+		FullMethod: "/pkg.proto.category.v1.CategoryService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CategoryServiceServer).Update(ctx, req.(*UpdateCategoryRequest))
@@ -211,7 +211,7 @@ func _CategoryService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pkg.proto.category.CategoryService/Delete",
+		FullMethod: "/pkg.proto.category.v1.CategoryService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CategoryServiceServer).Delete(ctx, req.(*DeleteCategoryRequest))
@@ -220,7 +220,7 @@ func _CategoryService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 var _CategoryService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pkg.proto.category.CategoryService",
+	ServiceName: "pkg.proto.category.v1.CategoryService",
 	HandlerType: (*CategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

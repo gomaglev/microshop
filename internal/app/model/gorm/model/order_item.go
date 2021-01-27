@@ -29,8 +29,13 @@ type OrderItem struct {
 func (a *OrderItem) List(ctx context.Context, params *dto.ListOrderItemsParam, opts ...*common.QueryOptions) (*item.OrderItems, error) {
 	opt := GetQueryOption(opts...)
 	db := entity.GetOrderItemDB(ctx, a.DB)
+
+	if v := params.Id; v != "" {
+		db = db.Where("id = ?", v)
+	}
+
 	if v := params.Ids; len(v) > 0 {
-		db = db.Where("device_id in (?)", v)
+		db = db.Where("id in ?", v)
 	}
 
 	var list entity.OrderItems

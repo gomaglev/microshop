@@ -70,7 +70,8 @@ func (a *OrderService) Update(ctx context.Context, req *UpdateOrderRequest) (*Up
 // Delete order
 func (a *OrderService) Delete(ctx context.Context, req *DeleteOrderRequest) (*DeleteOrderResponse, error) {
 	params := &dto.DeleteOrderParam{
-		Id: req.Id,
+		Id:  req.Id,
+		Ids: req.Ids,
 	}
 	rows, err := a.OrderModel.Delete(ctx, params)
 	res := &DeleteOrderResponse{

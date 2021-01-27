@@ -29,8 +29,13 @@ type OrderItemMessage struct {
 func (a *OrderItemMessage) List(ctx context.Context, params *dto.ListOrderItemMessagesParam, opts ...*common.QueryOptions) (*message.OrderItemMessages, error) {
 	opt := GetQueryOption(opts...)
 	db := entity.GetOrderItemMessageDB(ctx, a.DB)
+
+	if v := params.Id; v != "" {
+		db = db.Where("id = ?", v)
+	}
+
 	if v := params.Ids; len(v) > 0 {
-		db = db.Where("device_id in (?)", v)
+		db = db.Where("id in ?", v)
 	}
 
 	var list entity.OrderItemMessages

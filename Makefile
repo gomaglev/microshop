@@ -109,6 +109,7 @@ PROTOC_FLAGS ?= \
 
 protos: # generate protobuf files
 	$(PROTOC) $(PROTOC_FLAGS) ${PROTO_FILES}
+	$(PROTOC_INJECT_TAG) -input="${PROTO_PB_FILES}" -verbose=false
 
 faker: # add faker tag to proto files
 	$(PROTOC_INJECT_TAG) -input="${PROTO_PB_FILES}" -verbose=false

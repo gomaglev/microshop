@@ -93,6 +93,7 @@ message UpdateItemResponse {
 message DeleteItemRequest {
   string id = 1;
   string order_id = 2;
+  repeated string ids = 3;
 }
 
 message DeleteItemResponse {

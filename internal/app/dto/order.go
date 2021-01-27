@@ -33,7 +33,8 @@ type UpdateOrderParam struct {
 
 // DeleteOrderParam
 type DeleteOrderParam struct {
-	Id string
+	Id  string
+	Ids []string
 }
 
 // ProtoOrders

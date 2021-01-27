@@ -66,8 +66,6 @@ message GetOrderResponse {
 
 message ListOrdersRequest {
   repeated string ids = 1;
-  string application_id = 2;
-  string account_id = 3;
   common.PaginationParam pagination=4 [(validate.rules).message.required = true];
 }
 
@@ -96,6 +94,7 @@ message UpdateOrderResponse {
 
 message DeleteOrderRequest {
   string id = 1;
+  repeated string ids = 2;
 }
 
 message DeleteOrderResponse {

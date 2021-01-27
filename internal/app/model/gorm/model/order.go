@@ -34,6 +34,14 @@ func (m *Order) List(ctx context.Context, params *dto.ListOrdersParam, opts ...*
 		db = db.Select(opt.SelectFields)
 	}
 
+	if v := params.Id; v != "" {
+		db = db.Where("id = ?", v)
+	}
+
+	if v := params.Ids; len(v) > 0 {
+		db = db.Where("id in ?", v)
+	}
+
 	var list entity.Orders
 	pr, err := WrapPageQuery(ctx, db, params.Pagination, opt, &list)
 	if err != nil {
@@ -101,9 +109,26 @@ func (m *Order) UpdateColumns(ctx context.Context, params *dto.UpdateOrderParam,
 
 // Delete
 func (m *Order) Delete(ctx context.Context, params *dto.DeleteOrderParam) (*int64, error) {
-	result := entity.GetOrderDB(ctx, m.DB).Where("id=?", params.Id).Delete(entity.Order{})
-	if err := result.Error; err != nil {
-		return nil, errors.WithStack(err)
+	db := entity.GetOrderDB(ctx, m.DB)
+	rowsAffected := int64(0)
+	if params.Id != "" {
+		db = db.Where("id=?", params.Id)
+		result := db.Delete(entity.Order{})
+		if err := result.Error; err != nil {
+			return nil, errors.WithStack(err)
+		}
+		rowsAffected = result.RowsAffected
 	}
-	return &result.RowsAffected, nil
+
+	if len(params.Ids) > 0 {
+		db = db.Where("id in (?)", params.Ids)
+		result := db.Delete(entity.Order{})
+		if err := result.Error; err != nil {
+			return nil, errors.WithStack(err)
+		}
+		rowsAffected = result.RowsAffected
+	}
+
+	// add other conditions here
+	return &rowsAffected, nil
 }

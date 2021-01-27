@@ -99,6 +99,7 @@ message UpdateCategoryResponse {
 
 message DeleteCategoryRequest {
   string id = 1;
+  repeated string ids = 2;
 }
 
 message DeleteCategoryResponse {

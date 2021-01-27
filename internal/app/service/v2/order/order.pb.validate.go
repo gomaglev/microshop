@@ -186,10 +186,6 @@ func (m *ListOrdersRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for ApplicationId
-
-	// no validation rules for AccountId
-
 	if m.GetPagination() == nil {
 		return ListOrdersRequestValidationError{
 			field:  "Pagination",
