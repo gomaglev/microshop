@@ -13,7 +13,7 @@ service MessageService {
   // Get order/message 
   rpc Get(GetMessageRequest) returns (GetMessageResponse) {
     option (google.api.http) = {
-      get: "/v1/orders/{order_id}/messages/{id}"
+      get: "/v1/orders/{order_id}/items/{item_id}/messages/{id}"
       response_body : "message"
     };
   }
@@ -21,7 +21,7 @@ service MessageService {
   // list messages
   rpc List(ListMessagesRequest) returns (ListMessagesResponse) {
     option (google.api.http) = {
-      get: "/v1/orders/{order_id}/messages"
+      get: "/v1/orders/{order_id}/items/{item_id}/messages"
       response_body : "messages"
     };
   }
@@ -29,7 +29,7 @@ service MessageService {
   // Create order/message
   rpc Create(CreatMessageRequest) returns (CreatMessageResponse) {
     option (google.api.http) = {
-      post: "/v1/orders/{order_id}/messages"
+      post: "/v1/orders/{order_id}/items/{item_id}/messages"
       body: "*"
     };
   };
@@ -37,7 +37,7 @@ service MessageService {
   // Update order/message
   rpc Update(UpdateMessageRequest) returns (UpdateMessageResponse) {
 		option (google.api.http) = {
-			put: "/v1/orders/{order_id}/messages/{id}"
+			put: "/v1/orders/{order_id}/items/{item_id}/messages/{id}"
 			body: "*"
 		};
   }
@@ -45,14 +45,15 @@ service MessageService {
   // Delete order/message
 	rpc Delete(DeleteMessageRequest) returns (DeleteMessageResponse) {
 		option (google.api.http) = {
-			delete: "/v1/orders/{order_id}/messages/{id}"
+			delete: "/v1/orders/{order_id}/items/{item_id}/messages/{id}"
     };
   }
 }
 
 message GetMessageRequest {
-  string id = 1;
-  string order_id = 2;
+    string order_id = 1;
+    string item_id = 2;
+    string id = 3;
 }
 
 message GetMessageResponse {
@@ -60,9 +61,10 @@ message GetMessageResponse {
 }
 
 message ListMessagesRequest {
-  repeated string ids = 1;
-  string order_id = 2;
-  common.PaginationParam pagination=3 [(validate.rules).message.required = true];
+    string order_id = 1;
+    string item_id = 2;
+    repeated string ids = 3;
+    common.PaginationParam pagination=4 [(validate.rules).message.required = true];
 }
 
 message ListMessagesResponse {
@@ -71,18 +73,19 @@ message ListMessagesResponse {
 }
 
 message CreatMessageRequest {
-  string order_id = 1;
-  OrderItemMessage message = 2;
+    string order_id = 1;
+    string item_id = 2;
+    OrderItemMessage message = 3;
 }
 
 message CreatMessageResponse {
   string id = 1;  
 }
-
 message UpdateMessageRequest {
-  string id = 1;
-  string order_id = 2;
-  OrderItemMessage message = 3;
+    string order_id = 1;
+    string item_id = 2;
+    string id = 3;
+    OrderItemMessage message = 4;
 }
 
 message UpdateMessageResponse {
@@ -91,9 +94,10 @@ message UpdateMessageResponse {
 
 
 message DeleteMessageRequest {
-  string id = 1;
-  string order_id = 2;
-  repeated string ids = 3;
+    string order_id = 1;
+    string item_id = 2;
+    string id = 3;
+    repeated string ids = 4;
 }
 
 message DeleteMessageResponse {

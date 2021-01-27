@@ -44,9 +44,11 @@ func (m *GetMessageRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
-
 	// no validation rules for OrderId
+
+	// no validation rules for ItemId
+
+	// no validation rules for Id
 
 	return nil
 }
@@ -193,6 +195,8 @@ func (m *ListMessagesRequest) Validate() error {
 	}
 
 	// no validation rules for OrderId
+
+	// no validation rules for ItemId
 
 	if m.GetPagination() == nil {
 		return ListMessagesRequestValidationError{
@@ -357,6 +361,8 @@ func (m *CreatMessageRequest) Validate() error {
 
 	// no validation rules for OrderId
 
+	// no validation rules for ItemId
+
 	if v, ok := interface{}(m.GetMessage()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CreatMessageRequestValidationError{
@@ -503,9 +509,11 @@ func (m *UpdateMessageRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
-
 	// no validation rules for OrderId
+
+	// no validation rules for ItemId
+
+	// no validation rules for Id
 
 	if v, ok := interface{}(m.GetMessage()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
@@ -653,9 +661,11 @@ func (m *DeleteMessageRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
-
 	// no validation rules for OrderId
+
+	// no validation rules for ItemId
+
+	// no validation rules for Id
 
 	return nil
 }

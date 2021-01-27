@@ -11,7 +11,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/orders/{orderId}/messages": {
+    "/v1/orders/{orderId}/items/{itemId}/messages": {
       "get": {
         "summary": "list messages",
         "operationId": "MessageService_List",
@@ -32,6 +32,12 @@
         "parameters": [
           {
             "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -108,6 +114,12 @@
             "type": "string"
           },
           {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -121,7 +133,7 @@
         ]
       }
     },
-    "/v1/orders/{orderId}/messages/{id}": {
+    "/v1/orders/{orderId}/items/{itemId}/messages/{id}": {
       "get": {
         "summary": "Get order/message",
         "operationId": "MessageService_Get",
@@ -142,6 +154,12 @@
         "parameters": [
           {
             "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -177,6 +195,12 @@
         "parameters": [
           {
             "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -222,6 +246,12 @@
         "parameters": [
           {
             "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -366,6 +396,9 @@
         "orderId": {
           "type": "string"
         },
+        "itemId": {
+          "type": "string"
+        },
         "message": {
           "$ref": "#/definitions/messageOrderItemMessage"
         }
@@ -407,10 +440,13 @@
     "v1UpdateMessageRequest": {
       "type": "object",
       "properties": {
-        "id": {
+        "orderId": {
           "type": "string"
         },
-        "orderId": {
+        "itemId": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         },
         "message": {

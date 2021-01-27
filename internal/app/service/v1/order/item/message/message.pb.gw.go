@@ -52,6 +52,16 @@ func request_MessageService_Get_0(ctx context.Context, marshaler runtime.Marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
 	}
 
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -88,6 +98,16 @@ func local_request_MessageService_Get_0(ctx context.Context, marshaler runtime.M
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
 	}
 
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -104,7 +124,7 @@ func local_request_MessageService_Get_0(ctx context.Context, marshaler runtime.M
 }
 
 var (
-	filter_MessageService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{"order_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_MessageService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{"order_id": 0, "item_id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_MessageService_List_0(ctx context.Context, marshaler runtime.Marshaler, client MessageServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -126,6 +146,16 @@ func request_MessageService_List_0(ctx context.Context, marshaler runtime.Marsha
 	protoReq.OrderId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
+	}
+
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -159,6 +189,16 @@ func local_request_MessageService_List_0(ctx context.Context, marshaler runtime.
 	protoReq.OrderId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
+	}
+
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -202,6 +242,16 @@ func request_MessageService_Create_0(ctx context.Context, marshaler runtime.Mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
 	}
 
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
+	}
+
 	msg, err := client.Create(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -236,6 +286,16 @@ func local_request_MessageService_Create_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
 	}
 
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
+	}
+
 	msg, err := server.Create(ctx, &protoReq)
 	return msg, metadata, err
 
@@ -268,6 +328,16 @@ func request_MessageService_Update_0(ctx context.Context, marshaler runtime.Mars
 	protoReq.OrderId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
+	}
+
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
 	}
 
 	val, ok = pathParams["id"]
@@ -314,6 +384,16 @@ func local_request_MessageService_Update_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
 	}
 
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
+	}
+
 	val, ok = pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -330,7 +410,7 @@ func local_request_MessageService_Update_0(ctx context.Context, marshaler runtim
 }
 
 var (
-	filter_MessageService_Delete_0 = &utilities.DoubleArray{Encoding: map[string]int{"order_id": 0, "id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_MessageService_Delete_0 = &utilities.DoubleArray{Encoding: map[string]int{"order_id": 0, "item_id": 1, "id": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_MessageService_Delete_0(ctx context.Context, marshaler runtime.Marshaler, client MessageServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -352,6 +432,16 @@ func request_MessageService_Delete_0(ctx context.Context, marshaler runtime.Mars
 	protoReq.OrderId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
+	}
+
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
 	}
 
 	val, ok = pathParams["id"]
@@ -395,6 +485,16 @@ func local_request_MessageService_Delete_0(ctx context.Context, marshaler runtim
 	protoReq.OrderId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "order_id", err)
+	}
+
+	val, ok = pathParams["item_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "item_id")
+	}
+
+	protoReq.ItemId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "item_id", err)
 	}
 
 	val, ok = pathParams["id"]
@@ -703,15 +803,15 @@ func (m response_MessageService_List_0) XXX_ResponseBody() interface{} {
 }
 
 var (
-	pattern_MessageService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "orders", "order_id", "messages", "id"}, ""))
+	pattern_MessageService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "orders", "order_id", "items", "item_id", "messages", "id"}, ""))
 
-	pattern_MessageService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "orders", "order_id", "messages"}, ""))
+	pattern_MessageService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "orders", "order_id", "items", "item_id", "messages"}, ""))
 
-	pattern_MessageService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "orders", "order_id", "messages"}, ""))
+	pattern_MessageService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "orders", "order_id", "items", "item_id", "messages"}, ""))
 
-	pattern_MessageService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "orders", "order_id", "messages", "id"}, ""))
+	pattern_MessageService_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "orders", "order_id", "items", "item_id", "messages", "id"}, ""))
 
-	pattern_MessageService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "orders", "order_id", "messages", "id"}, ""))
+	pattern_MessageService_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"v1", "orders", "order_id", "items", "item_id", "messages", "id"}, ""))
 )
 
 var (
