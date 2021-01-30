@@ -14,7 +14,6 @@ import (
 	"github.com/gomaglev/microshop/pkg/logger"
 
 	"github.com/google/gops/agent"
-	"google.golang.org/grpc"
 )
 
 type options struct {
@@ -23,31 +22,31 @@ type options struct {
 	Version    string
 }
 
-// Option 定义配置项
+// Option
 type Option func(*options)
 
-// SetConfigFile 设定配置文件
+// SetConfigFile
 func SetConfigFile(s string) Option {
 	return func(o *options) {
 		o.ConfigFile = s
 	}
 }
 
-// SetWWWDir 设定静态站点目录
+// SetWWWDir
 func SetWWWDir(s string) Option {
 	return func(o *options) {
 		o.WWWDir = s
 	}
 }
 
-// SetVersion 设定版本号
+// SetVersion
 func SetVersion(s string) Option {
 	return func(o *options) {
 		o.Version = s
 	}
 }
 
-// Init 应用初始化
+// Init
 func Init(ctx context.Context, opts ...Option) (func(), error) {
 	var o options
 	for _, opt := range opts {
@@ -60,7 +59,7 @@ func Init(ctx context.Context, opts ...Option) (func(), error) {
 	}
 	config.PrintWithJSON()
 
-	logger.Printf(ctx, "服务启动，运行模式：%s，版本号：%s，进程号：%d", config.C.RunMode, o.Version, os.Getpid())
+	logger.Printf(ctx, "start service，run mode：%s，version：%s，pid：%d", config.C.RunMode, o.Version, os.Getpid())
 
 	// Initialize unique id
 	iutil.InitID()
@@ -68,29 +67,25 @@ func Init(ctx context.Context, opts ...Option) (func(), error) {
 	// Initialize short id
 	iutil.InitShortID()
 
-	// 初始化服务运行监控
+	// Initiate monitor
 	monitorCleanFunc := InitMonitor(ctx)
 
-	// 初始化日志模块
+	// Initiate logger
 	loggerCleanFunc, err := InitLogger()
 	if err != nil {
 		return nil, err
 	}
 
-	// 初始化依赖注入器
+	// Initiate injector
 	injector, injectorCleanFunc, err := injector.BuildInjector()
 	if err != nil {
 		return nil, err
 	}
 
-	// Grpc server initialization
-	server, serverCleanFunc := InitServer(injector)
-
-	// Grpc gateway initialization
-	gatewayCleanFunc := InitGateway(injector, server)
+	// Initiate gRPC & gateway server
+	serverCleanFunc := InitServer(injector)
 
 	return func() {
-		gatewayCleanFunc()
 		serverCleanFunc()
 		injectorCleanFunc()
 		loggerCleanFunc()
@@ -98,14 +93,14 @@ func Init(ctx context.Context, opts ...Option) (func(), error) {
 	}, nil
 }
 
-// InitMonitor 初始化服务监控
+// InitMonitor
 func InitMonitor(ctx context.Context) func() {
 	if c := config.C.Monitor; c.Enable {
 		// ShutdownCleanup set false to prevent automatically closes on os.Interrupt
 		// and close agent manually before service shutting down
 		err := agent.Listen(agent.Options{Addr: c.Addr, ConfigDir: c.ConfigDir, ShutdownCleanup: false})
 		if err != nil {
-			logger.Errorf(ctx, "Agent monitor error: %s", err.Error())
+			logger.Errorf(ctx, "agent monitor error: %s", err.Error())
 		}
 		return func() {
 			agent.Close()
@@ -114,25 +109,14 @@ func InitMonitor(ctx context.Context) func() {
 	return func() {}
 }
 
-func InitServer(injector *injector.Injector) (*grpc.Server, func()) {
+func InitServer(injector *injector.Injector) func() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 	return injector.Server.Setup(ctx)
 }
 
-func InitGateway(injector *injector.Injector, server *grpc.Server) func() {
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-	if !config.C.Gateway.Enable {
-		return func() {
-			logger.Infof(ctx, "grpc gateway is not enabled")
-		}
-	}
-	return injector.Gateway.Setup(ctx, server)
-}
-
-// Run 运行服务
+// Run
 func Run(ctx context.Context, opts ...Option) error {
 	var state int32 = 1
 	sc := make(chan os.Signal, 1)
@@ -145,7 +129,7 @@ func Run(ctx context.Context, opts ...Option) error {
 EXIT:
 	for {
 		sig := <-sc
-		logger.Printf(ctx, "接收到信号[%s]", sig.String())
+		logger.Printf(ctx, "signal received: [%s]", sig.String())
 		switch sig {
 		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
 			atomic.CompareAndSwapInt32(&state, 1, 0)
@@ -157,7 +141,7 @@ EXIT:
 	}
 
 	cleanFunc()
-	logger.Printf(ctx, "服务退出")
+	logger.Printf(ctx, "quit service")
 	time.Sleep(time.Second)
 	os.Exit(int(atomic.LoadInt32(&state)))
 	return nil

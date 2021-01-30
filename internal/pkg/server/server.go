@@ -6,8 +6,7 @@ import (
 	"github.com/google/wire"
 )
 
-// ServerSet inject server
+// ServerSet inject grpc & gateway server
 var ServerSet = wire.NewSet(
 	rpc.ServerSet,
-	rpc.GatewaySet,
 )

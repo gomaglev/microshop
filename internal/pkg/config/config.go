@@ -16,12 +16,11 @@ import (
 )
 
 var (
-	// C 全局配置(需要先执行MustLoad，否则拿不到配置)
 	C    = new(Config)
 	once sync.Once
 )
 
-// MustLoad 加载配置
+// MustLoad load configs
 func MustLoad(fpaths ...string) {
 	once.Do(func() {
 		loaders := []multiconfig.Loader{
@@ -49,7 +48,7 @@ func MustLoad(fpaths ...string) {
 	})
 }
 
-// PrintWithJSON 基于JSON格式输出配置
+// PrintWithJSON prints configs in JSON format
 func PrintWithJSON() {
 	if C.PrintConfig {
 		b, err := json.MarshalIndent(C, "", " ")
@@ -61,47 +60,20 @@ func PrintWithJSON() {
 	}
 }
 
-// IsDebugMode 是否是debug模式
-func (c *Config) IsDebugMode() bool {
-	return c.RunMode == "debug"
-}
-
-// Upload 文件上传配置参数
-type Upload struct {
-	RootPath    string
-	SavePath    string
-	MaxFileSize uint
-}
-
-// Menu 菜单配置参数
-type Menu struct {
-	Enable bool
-	Data   string
-}
-
-// Casbin casbin配置参数
-type Casbin struct {
-	Enable           bool
-	Debug            bool
-	Model            string
-	AutoLoad         bool
-	AutoLoadInternal int
-}
-
 // LogHook 日志钩子
 type LogHook string
 
-// IsGorm 是否是gorm钩子
+// IsGorm is gorm log hook
 func (h LogHook) IsGorm() bool {
 	return h == "gorm"
 }
 
-// IsMongo 是否是mongo钩子
+// IsMongo is mongo log hook
 func (h LogHook) IsMongo() bool {
 	return h == "mongo"
 }
 
-// Log 日志配置参数
+// Log log params
 type Log struct {
 	Level         int
 	Format        string
@@ -114,7 +86,7 @@ type Log struct {
 	HookMaxBuffer int
 }
 
-// LogGormHook 日志gorm钩子配置
+// LogGormHook
 type LogGormHook struct {
 	DBType       string
 	MaxLifetime  int
@@ -123,36 +95,12 @@ type LogGormHook struct {
 	Table        string
 }
 
-// LogMongoHook 日志mongo钩子配置
+// LogMongoHook
 type LogMongoHook struct {
 	Collection string
 }
 
-// Root root用户
-type Root struct {
-	UserName string
-	Password string
-	RealName string
-}
-
-// Tenant Owner Role
-type TenantOwnerRole struct {
-	ID string
-}
-
-// JWTAuth 用户认证
-type JWTAuth struct {
-	Enable        bool
-	SigningMethod string
-	SigningKey    string
-	Expired       int
-	Store         string
-	FilePath      string
-	RedisDB       int
-	RedisPrefix   string
-}
-
-// Gateway http配置参数
+// Gateway
 type Gateway struct {
 	Host            string
 	Port            int
@@ -163,14 +111,14 @@ type Gateway struct {
 	Enable          bool
 }
 
-// Monitor 监控配置参数
+// Monitor
 type Monitor struct {
 	Enable    bool
 	Addr      string
 	ConfigDir string
 }
 
-// Captcha 图形验证码配置参数
+// Captcha
 type Captcha struct {
 	Store       string
 	Length      int
@@ -180,14 +128,14 @@ type Captcha struct {
 	RedisPrefix string
 }
 
-// RateLimiter 请求频率限制配置参数
+// RateLimiter
 type RateLimiter struct {
 	Enable  bool
 	Count   int64
 	RedisDB int
 }
 
-// CORS 跨域请求配置参数
+// CORS
 type CORS struct {
 	Enable           bool
 	AllowOrigins     []string
@@ -197,14 +145,14 @@ type CORS struct {
 	MaxAge           int
 }
 
-// GZIP gzip压缩
+// GZIP
 type GZIP struct {
 	Enable             bool
 	ExcludedExtentions []string
 	ExcludedPaths      []string
 }
 
-// Gorm gorm配置参数
+// Gorm
 type Gorm struct {
 	Debug             bool
 	DBType            string
@@ -216,7 +164,7 @@ type Gorm struct {
 	Timeout           time.Duration
 }
 
-// MySQL mysql配置参数
+// MySQL
 type MySQL struct {
 	Host       string
 	Port       int
@@ -226,13 +174,13 @@ type MySQL struct {
 	Parameters string
 }
 
-// DSN 数据库连接串
+// DSN
 func (a MySQL) DSN() string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?%s",
 		a.User, a.Password, a.Host, a.Port, a.DBName, a.Parameters)
 }
 
-// Postgres postgres配置参数
+// Postgres
 type Postgres struct {
 	Host     string
 	Port     int
@@ -242,23 +190,23 @@ type Postgres struct {
 	SSLMode  string
 }
 
-// DSN 数据库连接串
+// DSN
 func (a Postgres) DSN() string {
 	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s",
 		a.Host, a.Port, a.User, a.DBName, a.Password, a.SSLMode)
 }
 
-// Sqlite3 sqlite3配置参数
+// Sqlite3
 type Sqlite3 struct {
 	Path string
 }
 
-// DSN 数据库连接串
+// DSN
 func (a Sqlite3) DSN() string {
 	return a.Path
 }
 
-// Mongo mongo配置参数
+// Mongo
 type Mongo struct {
 	URI              string
 	Database         string
@@ -271,12 +219,11 @@ type GRPC struct {
 	Port            int
 	CertFile        string
 	KeyFile         string
-	EnableGateway   bool
 	RateLimitCount  int
 	ShutdownTimeout time.Duration
 }
 
-// Config 配置参数
+// Config
 type Config struct {
 	RunMode     string
 	WWW         string
@@ -310,13 +257,9 @@ type Config struct {
 	DefaultLang string
 }
 
-type MongoDB struct {
-	URI string `env:"MONGO_URI"`
-}
-
 type BasicAuth struct {
-	User      string `env:"BASIC_USER"`
-	Pass      string `env:"BASIC_PASS"`
+	User      string
+	Password  string
 	AuthToken string
 }
 
@@ -346,7 +289,7 @@ type Interceptor struct {
 }
 
 // Basic authenticate func
-func (a BasicAuth) AuthFunc() func(ctx context.Context) (context.Context, error) {
+func (a *BasicAuth) AuthFunc() func(ctx context.Context) (context.Context, error) {
 	return func(ctx context.Context) (context.Context, error) {
 		token, err := grpc_auth.AuthFromMD(ctx, "basic")
 		if err != nil {

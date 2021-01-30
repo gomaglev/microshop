@@ -11,7 +11,6 @@ var InjectorSet = wire.NewSet(wire.Struct(new(Injector), "*"))
 
 // Injector injections in app start
 type Injector struct {
-	Server  *rpc.Server
-	Gateway *rpc.Gateway
+	Server *rpc.Server
 	// Databus    databus.Databus
 }

@@ -27,12 +27,6 @@ type Register struct {
 	OrderServiceV2 *orderv2.OrderService
 }
 
-func (r *Register) DialOption() []grpc.DialOption {
-	var opts []grpc.DialOption
-	opts = append(opts, grpc.WithInsecure())
-	return opts
-}
-
 // RegisterServiceServers implementation
 func (r *Register) RegisterServiceServers(server *grpc.Server) {
 	// Item Service
@@ -66,4 +60,10 @@ func (r *Register) RegisterServiceHandlerFromEndpoints(ctx context.Context, mult
 
 func (r *Register) endpoint() string {
 	return fmt.Sprintf("%s:%d", config.C.Gateway.Host, config.C.Gateway.Port)
+}
+
+func (r *Register) DialOption() []grpc.DialOption {
+	var opts []grpc.DialOption
+	opts = append(opts, grpc.WithInsecure())
+	return opts
 }

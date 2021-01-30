@@ -15,13 +15,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// InitLogger 初始化日志模块
+// InitLogger
 func InitLogger() (func(), error) {
 	c := config.C.Log
 	logger.SetLevel(c.Level)
 	logger.SetFormatter(c.Format)
 
-	// 设定日志输出
+	// setup output of log
 	var file *os.File
 	if c.Output != "" {
 		switch c.Output {

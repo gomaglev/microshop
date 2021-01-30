@@ -41,10 +41,6 @@ service CategoryService {
 			additional_bindings: [
 				{
 					patch: "/v1/categories/{id}"
-					body: "category"
-				},
-				{
-					patch: "/v1/categories/{id}"
 					body: "*"
 				}
 			]

@@ -45,12 +45,8 @@ func BuildInjector() (*Injector, func(), error) {
 	server := &rpc.Server{
 		Register: register,
 	}
-	gateway := &rpc.Gateway{
-		Register: register,
-	}
 	injector := &Injector{
-		Server:  server,
-		Gateway: gateway,
+		Server: server,
 	}
 	return injector, func() {
 		cleanup()

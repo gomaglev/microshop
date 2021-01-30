@@ -229,7 +229,7 @@
       },
       "patch": {
         "summary": "Update category",
-        "operationId": "CategoryService_Update3",
+        "operationId": "CategoryService_Update2",
         "responses": {
           "200": {
             "description": "A successful response.",

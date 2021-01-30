@@ -37,154 +37,161 @@ ShutdownTimeout = 30
 # Rate Limit ?/s
 RateLimitCount = 100
 
+[BasicAuth]
+# basic auth usre
+User = "user"
+# basic auth password
+Password = "pass"
+
 [Log]
-# 日志级别(1:fatal 2:error,3:warn,4:info,5:debug)
+# Log level (1:fatal 2:error,3:warn,4:info,5:debug)
 Level = 5
-# 日志格式（支持输出格式：text/json）
+# log format（support format：text/json）
 Format = "text"
-# 日志输出(支持：stdout/stderr/file)
+# log output(support：stdout/stderr/file)
 Output = "stdout"
-# 指定日志输出的文件路径
+# log output file path
 OutputFile = "data/microshop.log"
-# 是否启用日志钩子
+# enable log hook
 EnableHook = false
-# 写入钩子的日志级别
+# log hook level
 HookLevels = ["info","warn","error"]
-# 日志钩子(支持：gorm/mongo)
+# log hook (support：gorm/mongo)
 Hook = "gorm"
-# 写入钩子的最大工作线程数量
+# hook max threads
 HookMaxThread = 1
-# 写入钩子的最大缓冲区数量
+# hook max buffer
 HookMaxBuffer = 512
 
 [LogGormHook]
-# 数据库类型(目前支持的数据库类型：mysql/sqlite3/postgres)
+# db type(support：mysql/sqlite3/postgres)
 DBType = "sqlite3"
-# 设置连接可以重用的最长时间(单位：秒)
+# max life time(s)
 MaxLifetime = 7200
-# 设置数据库的最大打开连接数
+# max open connections
 MaxOpenConns = 1
-# 设置空闲连接池中的最大连接数
+# max idle connections
 MaxIdleConns = 1
-# 数据库表名
+# table name
 Table = "logger"
 
 [LogMongoHook]
-# 数据库表名
+# collection name
 Collection = "logger"
 
-# 服务监控(GOPS:https://github.com/google/gops)
+# Service monitor(GOPS:https://github.com/google/gops)
 [Monitor]
-# 是否启用
+# Enable
 Enable = false
-# HTTP的监听地址和端口
+# HTTP address
 Addr = "192.168.1.118:16060"
-# 配置文件目录(为空则使用默认目录)
+# config directory(use default if blank)
 ConfigDir = ""
 
-# redis配置信息
+# Redis
 [Redis]
-# 地址
+# address
 Addr = "192.168.1.118:6379"
-# 密码
+# password
 Password = ""
 
-# 请求频率限制(如果redis可用则使用redis，否则使用内存存储)
+# Rate limiter(use memory if not redis)
 [RateLimiter]
-# 是否启用
+# enable
 Enable = false
-# 每分钟每个用户允许的最大请求数量
+# max rps
 Count = 300
-# redis数据库(如果存储方式是redis，则指定存储的数据库)
+# redis db(redis db if use redis)
 RedisDB = 10
 
 [CORS]
-# 是否启用
+# enable
 Enable = true
-# 允许跨域请求的域名列表(*表示全部允许)
+# allow origins(* is ALL)
 AllowOrigins = ["https://localhost:4200", "https://192.168.1.118:4200", "http://localhost:4200","http://192.168.1.118:4200","http://192.168.1.118:8000"]
-# 允许跨域请求的请求方式列表
+# methods allowed origins
 AllowMethods = ["GET","POST","PUT","DELETE","PATCH"]
-# 允许客户端与跨域请求一起使用的非简单标头的列表
+# allowed headers
 AllowHeaders = ["Content-Type", "authorization"]
-# 请求是否可以包含cookie，HTTP身份验证或客户端SSL证书等用户凭据
+# if request includes cookie, http authentication or ssl cert
 AllowCredentials = true
-# 可以缓存预检请求结果的时间（以秒为单位）
+# max cache age of requests(s)
 MaxAge = 7200
 
 [Gorm]
-# 是否开启调试模式
+# Enable debug
 Debug = true
-# 数据库类型(目前支持的数据库类型：mysql/sqlite3/postgres)
+# satabase type(Currently support：mysql/sqlite3/postgres)
 DBType = "postgres"
-# 设置连接可以重用的最长时间(单位：秒)
+# connection max life time(s秒)
 MaxLifetime = 7200
-# 设置数据库的最大打开连接数
+# max open connections
 MaxOpenConns = 150
-# 设置空闲连接池中的最大连接数
+# max idle connections in connection pool
 MaxIdleConns = 50
-# 数据库表名前缀
+# table schema
 Schema = ""
-# 是否启用自动映射数据库表结构
+# enable auto migration
 EnableAutoMigrate = true
 
 [MySQL]
-# 连接地址
+# Host
 Host = "192.168.1.118"
-# 连接端口
+# Port
 Port= 3306
-# 用户名
+# User
 User = "root"
-# 密码
+# Password
 Password = "123456"
-# 数据库
-DBName = "themis"
-# 连接参数
+# Database name
+DBName = "microshop"
+# other parameters
 Parameters = "charset=utf8mb4&parseTime=True&loc=Local&allowNativePasswords=true"
 
 [Postgres]
-# 连接地址
+# Host
 Host = "192.168.1.118"
-# 连接端口
+# Port
 Port= 5432
-# 用户名
+# User
 User = "postgres"
-# 密码
+# Password
 Password = "password"
-# 数据库
-DBName = "themis"
-# SSL模式
+# Database name
+DBName = "microshop"
+# SSL mode
 SSLMode = "disable"
+# other parameters
+Parameters = ""
 
 [Sqlite3]
-# 数据库路径
-Path = "data/themis.db"
+# Database file path
+Path = "data/microshop.db"
 
-# mongo需要满足以下条件：
-# 4.0以上版本
-# 安装后以replication set（复本集）模式启动；
+# mongo version >=4.0
+# replication set mode start
 # replication:
 #   replSetName: rs0
 # rs.initiate()
 # rs.status()
-# StorageEngine(存储引擎)须是wiredTiger (支持文档级别的锁)，4.0以上版本已经默认支持
+# StorageEngine choose wiredTiger
 [Mongo]
-# 连接地址(mongodb://user:password@192.168.1.118:27017/?authSource=admin)
+# URI(mongodb://user:password@192.168.1.118:27017/?authSource=admin)
 URI = "mongodb://192.168.1.118:27017/?appName=microshop"
-# 数据库
+# Database name
 Database = "microshop"
-# 连接超时(单位秒)
+# Connection timeout (s)
 Timeout = 30
-# 集合名前缀
-CollectionPrefix = "g_"
+# collection prefix
+CollectionPrefix = "m_"
 
 [UniqueID]
-# 唯一ID类型(支持：uuid/object/snowflake)
+# Unique ID type(support：uuid/object/snowflake)
 Type = "snowflake"
 
 # https://github.com/twitter-archive/snowflake
 [UniqueID.Snowflake]
-# 节点标识(0-1023)
+# Node ID (0-1023)
 Node = 1
-# 开始时间戳(2020-01-02 15:04:05)
-Epoch = 1577977445000
+# Start timestamp(2021 11:13:17 PM GMT-08:00)
+Epoch = 1611990797000
