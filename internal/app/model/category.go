@@ -5,8 +5,9 @@ import (
 
 	"github.com/gomaglev/microshop/internal/app/dto"
 
-	"github.com/gomaglev/protos/pkg/proto/category"
-	"github.com/gomaglev/protos/pkg/proto/common"
+	"github.com/gomaglev/microshop/pkg/proto/category"
+
+	"github.com/gomaglev/microshop/pkg/proto/common"
 )
 
 // ICategory interface for Category model

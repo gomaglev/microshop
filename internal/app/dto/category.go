@@ -4,8 +4,9 @@ import (
 	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
 	"github.com/gomaglev/microshop/pkg/util"
 
-	proto "github.com/gomaglev/protos/pkg/proto/category"
-	"github.com/gomaglev/protos/pkg/proto/common"
+	proto "github.com/gomaglev/microshop/pkg/proto/category"
+
+	"github.com/gomaglev/microshop/pkg/proto/common"
 )
 
 // GetCategoryParam

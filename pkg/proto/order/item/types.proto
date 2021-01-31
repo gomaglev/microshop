@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pkg.proto.order.item;
+option go_package = "github.com/gomaglev/microshop/pkg/proto/order/item;item";
+
+import "google/protobuf/timestamp.proto";
+import "pkg/proto/common/common.proto";
+
+// OrderItem
+message OrderItem {
+    // @inject_tag: faker:"uuid_hyphenated"
+    string id = 1;
+    // @inject_tag: faker:"oneof: 4.95, 9.99, 31997.97"
+    double price = 2;
+    // @inject_tag: faker:"oneof: 11, 12"
+    int64  quantity = 3;
+    // @inject_tag: faker:"uuid_hyphenated"
+    string product_id = 4;
+    // @inject_tag: faker:"uuid_hyphenated"
+    string order_id = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message OrderItems {
+    repeated OrderItem list = 1;
+    common.PaginationResult pagination = 2;
+}

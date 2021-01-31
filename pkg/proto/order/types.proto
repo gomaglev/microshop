@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pkg.proto.order;
+option go_package = "github.com/gomaglev/microshop/pkg/proto/order;order";
+
+import "google/protobuf/timestamp.proto";
+import "pkg/proto/common/common.proto";
+
+// Order
+message Order {
+    // @inject_tag: faker:"uuid_hyphenated"
+    string id = 1;
+    // @inject_tag: faker:"oneof: 0,1,2,3,4,5"
+    string status = 2;
+    google.protobuf.Timestamp delivered_at = 3;
+    // @inject_tag: faker:"uuid_hyphenated"
+    string user_id = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message Orders {
+    repeated Order list = 1;
+    common.PaginationResult pagination = 2;
+}
+

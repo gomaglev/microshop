@@ -5,8 +5,8 @@ import (
 
 	"github.com/gomaglev/microshop/internal/app/dto"
 
-	"github.com/gomaglev/protos/pkg/proto/common"
-	"github.com/gomaglev/protos/pkg/proto/order/item/message"
+	"github.com/gomaglev/microshop/pkg/proto/common"
+	"github.com/gomaglev/microshop/pkg/proto/order/item/message"
 )
 
 // IOrderItemMessage interface for OrderItemMessage model

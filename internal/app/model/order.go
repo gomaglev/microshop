@@ -5,8 +5,8 @@ import (
 
 	"github.com/gomaglev/microshop/internal/app/dto"
 
-	"github.com/gomaglev/protos/pkg/proto/common"
-	"github.com/gomaglev/protos/pkg/proto/order"
+	"github.com/gomaglev/microshop/pkg/proto/common"
+	"github.com/gomaglev/microshop/pkg/proto/order"
 )
 
 // IOrder interface for Order model

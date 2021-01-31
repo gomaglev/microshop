@@ -88,28 +88,54 @@ check-build-existence: ## Check docker existence
 # gRPC #
 ########
 
-PROTO_FILES ?= $(shell find $(PWD) -type f -path '*.proto' | grep -v "vendor")
-#PROTO_FILES ?= $(PWD)/api/application.proto
+API_PROTO_FILES ?= $(shell find $(PWD)/api -type f -path '*.proto')
+PKG_PROTO_FILES ?= $(shell find $(PWD)/pkg -type f -path '*.proto')
+OTR_PROTO_FILES ?= $(shell find $(PWD) -type f -path '*.proto' | grep -v "vendor\|pkg\|api")
 PROTO_PB_FILES ?= $(shell find $(PWD) -type f -path '*.pb.go' | grep -v "vendor")
 
+PROTOC_INJECTOR := ${GOPATH}/bin/protoc-go-inject-tag
+
 PROTOC := ${GOPATH}/bin/protoc
-PROTOC_INJECT_TAG := ${GOPATH}/bin/protoc-go-inject-tag
-PROTOS_DEST = $(PWD)
-PROTOC_FLAGS ?= \
-    -I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+PROTO_PATH = $(PWD)
+
+GENSERVICEPROTO=sh -c '$(PROTOC) \
+	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
-    -I ${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
-	-I ${GOPATH}/src/github.com/gomaglev/protos \
-	--proto_path=${PROTOS_DEST} \
-	--grpc-gateway_out=logtostderr=true:$(PROTOS_DEST)/internal/app \
-	--go_out=$(PROTOS_DEST)/internal/app \
-	--go-grpc_out=require_unimplemented_servers=false:$(PROTOS_DEST)/internal/app \
-	--validate_out=lang=go:$(PROTOS_DEST)/internal/app \
-	--openapiv2_out ${PROTOS_DEST} --openapiv2_opt logtostderr=true \
+	-I ${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
+	-I ${PROTO_PATH} \
+	--proto_path=$$0 \
+	--grpc-gateway_out=logtostderr=true:$$1 \
+	--go_out=$$1 \
+	--go-grpc_out=require_unimplemented_servers=false:$$1 \
+	--validate_out=lang=go:$$1 \
+	--openapiv2_out $$0 --openapiv2_opt logtostderr=true $$2'
+
+
+GENPROTO=sh -c '$(PROTOC) \
+	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+	-I ${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
+	-I ${PROTO_PATH} \
+	--proto_path=$$0 \
+	--grpc-gateway_out=paths=source_relative,logtostderr=true:$$1 \
+	--go_out=paths=source_relative:$$1 \
+	--go-grpc_out=paths=source_relative,require_unimplemented_servers=false:$$1 \
+	--validate_out=paths=source_relative,lang=go:$$1 \
+	--openapiv2_out $$1 --openapiv2_opt logtostderr=true $$2'
 
 protos: # generate protobuf files
-	$(PROTOC) $(PROTOC_FLAGS) ${PROTO_FILES}
-	$(PROTOC_INJECT_TAG) -input="${PROTO_PB_FILES}" -verbose=false
+	for file in $(shell find ${PKG_PROTO_FILES} -type f -path '*.proto'); \
+	do $(GENPROTO) ${PROTO_PATH} ${PROTO_PATH} "$${file}"; done
+
+	for file in $(shell find $(API_PROTO_FILES) -type f -path '*.proto'); \
+	do $(GENSERVICEPROTO) ${PROTO_PATH} $(PROTO_PATH)/internal/app "$${file}"; done
+
+	#${GENPROTO} ${PROTO_PATH} ${PROTO_PATH} ${OTR_PROTO_FILES}
+	#$(GENPROTO) ${PROTO_PATH} $(PROTO_PATH)/api $(API_PROTO_FILES)
+	#${GENPROTO} ${PROTO_PATH} ${PROTO_PATH} ${PKG_PROTO_FILES}
+	#$(PROTOC_INJECTOR) -input="${PROTO_PB_FILES}" -verbose=false
 
 faker: # add faker tag to proto files
-	$(PROTOC_INJECT_TAG) -input="${PROTO_PB_FILES}" -verbose=false
+	$(PROTOC_INJECTOR) -input="${PROTO_PB_FILES}" -verbose=false
+
+

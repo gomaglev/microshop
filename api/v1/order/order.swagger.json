@@ -96,7 +96,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/orderv1CreatOrderResponse"
+              "$ref": "#/definitions/v1CreatOrderResponse"
             }
           },
           "default": {
@@ -112,7 +112,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/orderv1CreatOrderRequest"
+              "$ref": "#/definitions/v1CreatOrderRequest"
             }
           }
         ],
@@ -158,7 +158,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/orderv1DeleteOrderResponse"
+              "$ref": "#/definitions/v1DeleteOrderResponse"
             }
           },
           "default": {
@@ -197,7 +197,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/orderv1UpdateOrderResponse"
+              "$ref": "#/definitions/v1UpdateOrderResponse"
             }
           },
           "default": {
@@ -234,7 +234,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/orderv1UpdateOrderResponse"
+              "$ref": "#/definitions/v1UpdateOrderResponse"
             }
           },
           "default": {
@@ -256,7 +256,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/orderv1UpdateOrderRequest"
+              "$ref": "#/definitions/v1UpdateOrderRequest"
             }
           }
         ],
@@ -353,67 +353,6 @@
         }
       }
     },
-    "orderv1CreatOrderRequest": {
-      "type": "object",
-      "properties": {
-        "order": {
-          "$ref": "#/definitions/orderOrder"
-        }
-      }
-    },
-    "orderv1CreatOrderResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "orderv1DeleteOrderResponse": {
-      "type": "object",
-      "properties": {
-        "deleted": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "orderv1GetOrderResponse": {
-      "type": "object",
-      "properties": {
-        "order": {
-          "$ref": "#/definitions/orderOrder"
-        }
-      }
-    },
-    "orderv1ListOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "$ref": "#/definitions/orderOrders"
-        }
-      }
-    },
-    "orderv1UpdateOrderRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "order": {
-          "$ref": "#/definitions/orderOrder"
-        }
-      }
-    },
-    "orderv1UpdateOrderResponse": {
-      "type": "object",
-      "properties": {
-        "updated": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -441,6 +380,67 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1CreatOrderRequest": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/orderOrder"
+        }
+      }
+    },
+    "v1CreatOrderResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteOrderResponse": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/orderOrder"
+        }
+      }
+    },
+    "v1ListOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "$ref": "#/definitions/orderOrders"
+        }
+      }
+    },
+    "v1UpdateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/orderOrder"
+        }
+      }
+    },
+    "v1UpdateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }

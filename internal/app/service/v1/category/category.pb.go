@@ -9,8 +9,8 @@ package category
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	proto "github.com/golang/protobuf/proto"
-	category "github.com/gomaglev/protos/pkg/proto/category"
-	common "github.com/gomaglev/protos/pkg/proto/common"
+	category "github.com/gomaglev/microshop/pkg/proto/category"
+	common "github.com/gomaglev/microshop/pkg/proto/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
