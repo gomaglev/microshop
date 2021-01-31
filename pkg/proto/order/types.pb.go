@@ -34,12 +34,12 @@ type Order struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: faker:"uuid_hyphenated"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" faker:"uuid_hyphenated"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// @inject_tag: faker:"oneof: 0,1,2,3,4,5"
-	Status      string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty" faker:"oneof: 0,1,2,3,4,5"`
+	Status      string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	DeliveredAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=delivered_at,json=deliveredAt,proto3" json:"delivered_at,omitempty"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	UserId    string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty" faker:"uuid_hyphenated"`
+	UserId    string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }

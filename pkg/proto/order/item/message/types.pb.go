@@ -34,11 +34,11 @@ type OrderItemMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: faker:"uuid_hyphenated"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" faker:"uuid_hyphenated"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// @inject_tag: faker:"paragraph"
-	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty" faker:"paragraph"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	ItemId    string                 `protobuf:"bytes,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty" faker:"uuid_hyphenated"`
+	ItemId    string                 `protobuf:"bytes,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }

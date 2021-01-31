@@ -34,23 +34,23 @@ type Product struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: faker:"uuid_hyphenated"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" faker:"uuid_hyphenated"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// @inject_tag: faker:"name"
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" faker:"name"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// @inject_tag: faker:"word"
-	Sku string `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty" faker:"word"`
+	Sku string `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
 	// @inject_tag: faker:"url"
-	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty" faker:"url"`
+	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
 	// @inject_tag: faker:"paragraph"
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty" faker:"paragraph"`
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// @inject_tag: faker:"oneof: 4.95, 9.99, 31997.97"
-	Price string `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty" faker:"oneof: 4.95, 9.99, 31997.97"`
+	Price string `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
 	// @inject_tag: faker:"oneof: 17, 18"
-	Stock string `protobuf:"bytes,7,opt,name=stock,proto3" json:"stock,omitempty" faker:"oneof: 17, 18"`
+	Stock string `protobuf:"bytes,7,opt,name=stock,proto3" json:"stock,omitempty"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	CategoryId string `protobuf:"bytes,8,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty" faker:"uuid_hyphenated"`
+	CategoryId string `protobuf:"bytes,8,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
 	// @inject_tag: faker:"-"
-	Attributes  map[string]string      `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3" faker:"-"`
+	Attributes  map[string]string      `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	DeliveredAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=delivered_at,json=deliveredAt,proto3" json:"delivered_at,omitempty"`
 	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`

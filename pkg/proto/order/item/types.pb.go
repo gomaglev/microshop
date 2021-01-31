@@ -34,15 +34,15 @@ type OrderItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: faker:"uuid_hyphenated"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" faker:"uuid_hyphenated"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// @inject_tag: faker:"oneof: 4.95, 9.99, 31997.97"
-	Price float64 `protobuf:"fixed64,2,opt,name=price,proto3" json:"price,omitempty" faker:"oneof: 4.95, 9.99, 31997.97"`
+	Price float64 `protobuf:"fixed64,2,opt,name=price,proto3" json:"price,omitempty"`
 	// @inject_tag: faker:"oneof: 11, 12"
-	Quantity int64 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty" faker:"oneof: 11, 12"`
+	Quantity int64 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	ProductId string `protobuf:"bytes,4,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty" faker:"uuid_hyphenated"`
+	ProductId string `protobuf:"bytes,4,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	OrderId   string                 `protobuf:"bytes,5,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty" faker:"uuid_hyphenated"`
+	OrderId   string                 `protobuf:"bytes,5,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
