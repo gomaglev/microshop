@@ -5,7 +5,7 @@ import (
 
 	"github.com/gomaglev/microshop/pkg/util"
 
-	proto "github.com/gomaglev/protos/pkg/proto/product"
+	proto "github.com/gomaglev/microshop/pkg/proto/product"
 	"gorm.io/gorm"
 )
 

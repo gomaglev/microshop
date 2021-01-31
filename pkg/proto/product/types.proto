@@ -2,7 +2,7 @@
 syntax = "proto3";
 
 package pkg.proto.product;
-option go_package = "github.com/gomaglev/protos/pkg/proto/product;product";
+option go_package = "github.com/gomaglev/microshop/pkg/proto/product;product";
 
 import "google/protobuf/timestamp.proto";
 import "pkg/proto/common/common.proto";

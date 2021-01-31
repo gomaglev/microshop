@@ -8,7 +8,7 @@ package product
 
 import (
 	proto "github.com/golang/protobuf/proto"
-	common "github.com/gomaglev/protos/pkg/proto/common"
+	common "github.com/gomaglev/microshop/pkg/proto/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -34,23 +34,23 @@ type Product struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: faker:"uuid_hyphenated"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" faker:"uuid_hyphenated"`
 	// @inject_tag: faker:"name"
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" faker:"name"`
 	// @inject_tag: faker:"word"
-	Sku string `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
+	Sku string `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty" faker:"word"`
 	// @inject_tag: faker:"url"
-	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty" faker:"url"`
 	// @inject_tag: faker:"paragraph"
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty" faker:"paragraph"`
 	// @inject_tag: faker:"oneof: 4.95, 9.99, 31997.97"
-	Price string `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
+	Price string `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty" faker:"oneof: 4.95, 9.99, 31997.97"`
 	// @inject_tag: faker:"oneof: 17, 18"
-	Stock string `protobuf:"bytes,7,opt,name=stock,proto3" json:"stock,omitempty"`
+	Stock string `protobuf:"bytes,7,opt,name=stock,proto3" json:"stock,omitempty" faker:"oneof: 17, 18"`
 	// @inject_tag: faker:"uuid_hyphenated"
-	CategoryId string `protobuf:"bytes,8,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	CategoryId string `protobuf:"bytes,8,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty" faker:"uuid_hyphenated"`
 	// @inject_tag: faker:"-"
-	Attributes  map[string]string      `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Attributes  map[string]string      `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3" faker:"-"`
 	DeliveredAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=delivered_at,json=deliveredAt,proto3" json:"delivered_at,omitempty"`
 	CreatedAt   *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -277,11 +277,11 @@ var file_pkg_proto_product_types_proto_rawDesc = []byte{
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x70, 0x6b, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x6d, 0x61, 0x67, 0x6c, 0x65, 0x76, 0x2f, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x3b, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x6d, 0x61, 0x67, 0x6c, 0x65, 0x76, 0x2f, 0x6d, 0x69, 0x63,
+	0x72, 0x6f, 0x73, 0x68, 0x6f, 0x70, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2f, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x3b, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

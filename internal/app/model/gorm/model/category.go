@@ -9,7 +9,7 @@ import (
 
 	"github.com/gomaglev/microshop/pkg/proto/category"
 
-	"github.com/gomaglev/protos/pkg/proto/common"
+	"github.com/gomaglev/microshop/pkg/proto/common"
 	"gorm.io/gorm"
 
 	"github.com/google/wire"

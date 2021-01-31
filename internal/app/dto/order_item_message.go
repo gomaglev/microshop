@@ -4,8 +4,8 @@ import (
 	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
 	"github.com/gomaglev/microshop/pkg/util"
 
-	"github.com/gomaglev/protos/pkg/proto/common"
-	proto "github.com/gomaglev/protos/pkg/proto/order/item/message"
+	"github.com/gomaglev/microshop/pkg/proto/common"
+	proto "github.com/gomaglev/microshop/pkg/proto/order/item/message"
 )
 
 // GetOrderItemMessageParam

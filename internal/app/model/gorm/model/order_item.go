@@ -7,8 +7,8 @@ import (
 	"github.com/gomaglev/microshop/internal/app/model"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
 
-	"github.com/gomaglev/protos/pkg/proto/common"
-	"github.com/gomaglev/protos/pkg/proto/order/item"
+	"github.com/gomaglev/microshop/pkg/proto/common"
+	"github.com/gomaglev/microshop/pkg/proto/order/item"
 	"gorm.io/gorm"
 
 	"github.com/google/wire"

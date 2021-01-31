@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pkg.proto.common;
 
-option go_package = "github.com/gomaglev/protos/pkg/proto/common;common";
+option go_package = "github.com/gomaglev/microshop/pkg/proto/common;common";
 
 import "validate/validate.proto";
 

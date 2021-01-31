@@ -11,8 +11,8 @@ import (
 
 	mock "github.com/gomaglev/microshop/internal/app/test/mock/model"
 	iutil "github.com/gomaglev/microshop/internal/pkg/util"
-	"github.com/gomaglev/protos/pkg/proto/common"
-	orderproto "github.com/gomaglev/protos/pkg/proto/order"
+	"github.com/gomaglev/microshop/pkg/proto/common"
+	orderproto "github.com/gomaglev/microshop/pkg/proto/order"
 	"github.com/stretchr/testify/assert"
 )
 

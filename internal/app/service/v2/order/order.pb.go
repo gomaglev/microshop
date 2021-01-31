@@ -11,8 +11,8 @@ package order
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	proto "github.com/golang/protobuf/proto"
-	common "github.com/gomaglev/protos/pkg/proto/common"
-	order "github.com/gomaglev/protos/pkg/proto/order"
+	common "github.com/gomaglev/microshop/pkg/proto/common"
+	order "github.com/gomaglev/microshop/pkg/proto/order"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package pkg.proto.order.item.message;
-option go_package = "github.com/gomaglev/protos/pkg/proto/order/item/message;message";
+option go_package = "github.com/gomaglev/microshop/pkg/proto/order/item/message;message";
 
 import "google/protobuf/timestamp.proto";
 import "pkg/proto/common/common.proto";
