@@ -98,7 +98,7 @@ PROTOC_INJECTOR := ${GOPATH}/bin/protoc-go-inject-tag
 PROTOC := ${GOPATH}/bin/protoc
 PROTO_PATH = $(PWD)
 
-GENPROTO1=sh -c '$(PROTOC) \
+GENSERVICEPROTO=sh -c '$(PROTOC) \
 	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 	-I ${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate \
@@ -108,7 +108,7 @@ GENPROTO1=sh -c '$(PROTOC) \
 	--go_out=$$1 \
 	--go-grpc_out=require_unimplemented_servers=false:$$1 \
 	--validate_out=lang=go:$$1 \
-	--openapiv2_out $$1 --openapiv2_opt logtostderr=true $$2'
+	--openapiv2_out $$0 --openapiv2_opt logtostderr=true $$2'
 
 
 GENPROTO=sh -c '$(PROTOC) \
@@ -124,11 +124,18 @@ GENPROTO=sh -c '$(PROTOC) \
 	--openapiv2_out $$1 --openapiv2_opt logtostderr=true $$2'
 
 protos: # generate protobuf files
+	for file in $(shell find ${PKG_PROTO_FILES} -type f -path '*.proto'); \
+	do $(GENPROTO) ${PROTO_PATH} ${PROTO_PATH} "$${file}"; done
+
+	for file in $(shell find $(API_PROTO_FILES) -type f -path '*.proto'); \
+	do $(GENSERVICEPROTO) ${PROTO_PATH} $(PROTO_PATH)/internal/app "$${file}"; done
+
 	#${GENPROTO} ${PROTO_PATH} ${PROTO_PATH} ${OTR_PROTO_FILES}
 	#$(GENPROTO) ${PROTO_PATH} $(PROTO_PATH)/api $(API_PROTO_FILES)
-	${GENPROTO} ${PROTO_PATH} ${PROTO_PATH} ${PKG_PROTO_FILES}
+	#${GENPROTO} ${PROTO_PATH} ${PROTO_PATH} ${PKG_PROTO_FILES}
 	#$(PROTOC_INJECTOR) -input="${PROTO_PB_FILES}" -verbose=false
 
 faker: # add faker tag to proto files
 	$(PROTOC_INJECTOR) -input="${PROTO_PB_FILES}" -verbose=false
+
 

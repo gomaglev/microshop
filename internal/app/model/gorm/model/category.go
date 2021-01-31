@@ -7,7 +7,7 @@ import (
 	"github.com/gomaglev/microshop/internal/app/model"
 	"github.com/gomaglev/microshop/internal/app/model/gorm/entity"
 
-	"pkg/proto/category"
+	"github.com/gomaglev/microshop/pkg/proto/category"
 
 	"github.com/gomaglev/protos/pkg/proto/common"
 	"gorm.io/gorm"

@@ -5,7 +5,7 @@ import (
 
 	"github.com/gomaglev/microshop/internal/app/dto"
 
-	"pkg/proto/category"
+	"github.com/gomaglev/microshop/pkg/proto/category"
 
 	"github.com/gomaglev/protos/pkg/proto/common"
 )
