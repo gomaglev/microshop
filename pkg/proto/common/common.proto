@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package pkg.proto.common;
+
+option go_package = "github.com/gomaglev/protos/pkg/proto/common;common";
+
+import "validate/validate.proto";
+
+enum OrderBy {
+    UNKNOWN = 0;
+    ASC = 1;
+    DESC = 2;
+}
+
+message PaginationParam {
+    bool  pagination = 1;
+    bool  count_only = 2;
+    int32 page = 3 [(validate.rules).int32.gte = 1];
+    int32 page_size = 4 [(validate.rules).int32.lte = 10000];
+    string cursor = 5;
+}
+
+message PaginationResult {
+    int64 total = 1 [(validate.rules).int64.gte = 0];
+    int32 page = 2 [(validate.rules).int32.gte = 1];
+    int32 page_size = 3 [(validate.rules).int32.lte = 10000];
+    string cursor = 4;
+}
+
+message StatusResult {
+    string status = 1;
+}
+
+message IDResult {
+    string id = 1;
+}
+
+message ErrorItem {
+    int32 code = 1;
+    string message = 2;
+}
+
+message ErrorResult {
+    ErrorItem error = 1;
+}
+
+message OrderByField {
+    string Key = 1;
+    OrderBy Direction = 2;
+}
+
+message QueryOptions {
+    repeated OrderByField OrderByFields= 1;
+    repeated string SelectFields = 2;
+}

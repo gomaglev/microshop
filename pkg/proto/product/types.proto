@@ -1,0 +1,40 @@
+
+syntax = "proto3";
+
+package pkg.proto.product;
+option go_package = "github.com/gomaglev/protos/pkg/proto/product;product";
+
+import "google/protobuf/timestamp.proto";
+import "pkg/proto/common/common.proto";
+
+// Product
+message Product {
+    // @inject_tag: faker:"uuid_hyphenated"
+    string id = 1;
+    // @inject_tag: faker:"name"
+    string name = 2;
+    // @inject_tag: faker:"word"
+    string sku = 3;
+    // @inject_tag: faker:"url"
+    string url = 4;
+    // @inject_tag: faker:"paragraph"
+    string description = 5;
+    // @inject_tag: faker:"oneof: 4.95, 9.99, 31997.97"
+    string price = 6;
+    // @inject_tag: faker:"oneof: 17, 18"
+    string stock = 7;
+    // @inject_tag: faker:"uuid_hyphenated"
+    string category_id = 8;
+    // @inject_tag: faker:"-"
+    map<string, string> attributes = 9;
+    google.protobuf.Timestamp delivered_at = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+}
+
+
+message Products {
+    repeated Product list = 1;
+    common.PaginationResult pagination = 2;
+}
+
